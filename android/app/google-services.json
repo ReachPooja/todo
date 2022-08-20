@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "453181205902",
+    "project_id": "todo-d5201",
+    "storage_bucket": "todo-d5201.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:453181205902:android:9262c503f3dbaab3aa88df",
+        "android_client_info": {
+          "package_name": "com.poojaprajapat.todo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "453181205902-q9e0gb966d4k0traeco5sbfcdp6ep3vt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.poojaprajapat.todo",
+            "certificate_hash": "19711e71c74e361221cb87632d62b58f874783d4"
+          }
+        },
+        {
+          "client_id": "453181205902-612trql2vgb9d0rfns5agm7bj9o68v4f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1jR34rlODRrnnO-dxBdhacf03MdHr8NQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "453181205902-612trql2vgb9d0rfns5agm7bj9o68v4f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
