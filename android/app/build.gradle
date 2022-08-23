@@ -51,7 +51,7 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.poojaprajapat.todo"
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -84,12 +84,12 @@ android {
         }
         staging {
             dimension "default"
-            applicationIdSuffix ".stg"
+            // applicationIdSuffix ".stg"
             manifestPlaceholders = [appName: "[STG] Todo"]
         }
         development {
             dimension "default"
-            applicationIdSuffix ".dev"
+            // applicationIdSuffix ".dev"
             manifestPlaceholders = [appName: "[DEV] Todo"]
         }
     }
@@ -112,6 +112,6 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation platform('com.google.firebase:firebase-bom:30.3.2'),
+    implementation platform('com.google.firebase:firebase-bom:30.3.2')
     implementation 'com.google.firebase:firebase-analytics-ktx'
 }
