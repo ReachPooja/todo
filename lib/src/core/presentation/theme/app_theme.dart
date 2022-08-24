@@ -5,13 +5,38 @@ class AppTheme {
   static final ligthTheme = ThemeData(
     brightness: Brightness.light,
     primaryColor: AppColors.primaryColor,
-    scaffoldBackgroundColor: AppColors.primaryBackgroundColor,
     fontFamily: 'Poppins',
     appBarTheme: const AppBarTheme(
       color: AppColors.primaryColor,
     ),
+    textSelectionTheme: textSelectionTheme,
+    inputDecorationTheme: inputDecorationTheme,
     colorScheme: ColorScheme.fromSwatch(
-      accentColor: AppColors.primaryColor,
+      accentColor: AppColors.accentColor,
+    ),
+  );
+
+  static const textSelectionTheme = TextSelectionThemeData(
+    cursorColor: AppColors.primaryColor,
+    selectionHandleColor: AppColors.primaryColor,
+    selectionColor: AppColors.primaryBackgroundColor,
+  );
+
+  static final inputDecorationTheme = InputDecorationTheme(
+    floatingLabelStyle: const TextStyle(
+      color: AppColors.accentColor,
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: BorderSide(
+        color: Colors.grey.shade300,
+      ),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: const BorderSide(
+        color: AppColors.accentColor,
+      ),
     ),
   );
 }
