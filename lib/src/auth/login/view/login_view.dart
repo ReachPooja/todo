@@ -1,14 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:todo/src/core/presentation/theme/app_colors.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatefulWidget {
   const LoginView({super.key});
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+  late FocusNode emailFocusNode;
+  late FocusNode passwordFocusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    emailFocusNode = FocusNode()
+      ..addListener(() {
+        setState(() {});
+      });
+    passwordFocusNode = FocusNode()
+      ..addListener(() {
+        setState(() {});
+      });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailFocusNode.dispose();
+    passwordFocusNode.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: AppColors.primaryBackgroundColor,
+        // backgroundColor: AppColors.primaryBackgroundColor,
         body: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -31,21 +59,14 @@ class LoginView extends StatelessWidget {
                 height: 24,
               ),
               TextFormField(
+                focusNode: emailFocusNode,
+                cursorColor: AppColors.primaryColor,
                 decoration: InputDecoration(
-                  hintText: 'Enter email',
-                  filled: true,
-                  fillColor: Colors.white,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(
-                      color: Colors.white,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(
-                      color: Colors.white,
-                    ),
+                  labelText: 'Enter email',
+                  floatingLabelStyle: TextStyle(
+                    color: emailFocusNode.hasFocus
+                        ? AppColors.accentColor
+                        : Colors.grey,
                   ),
                 ),
               ),
@@ -53,21 +74,13 @@ class LoginView extends StatelessWidget {
                 height: 24,
               ),
               TextFormField(
+                focusNode: passwordFocusNode,
                 decoration: InputDecoration(
-                  hintText: 'Password',
-                  filled: true,
-                  fillColor: Colors.white,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(6),
-                    borderSide: const BorderSide(
-                      color: Colors.white,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(6),
-                    borderSide: const BorderSide(
-                      color: Colors.white,
-                    ),
+                  labelText: 'Password',
+                  floatingLabelStyle: TextStyle(
+                    color: passwordFocusNode.hasFocus
+                        ? AppColors.accentColor
+                        : Colors.grey,
                   ),
                 ),
               ),
