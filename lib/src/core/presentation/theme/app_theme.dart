@@ -7,7 +7,11 @@ class AppTheme {
     primaryColor: AppColors.primaryColor,
     fontFamily: 'Poppins',
     appBarTheme: const AppBarTheme(
-      color: AppColors.primaryColor,
+      color: Colors.transparent,
+      elevation: 0,
+      iconTheme: IconThemeData(
+        color: Colors.black,
+      ),
     ),
     textSelectionTheme: textSelectionTheme,
     inputDecorationTheme: inputDecorationTheme,
@@ -20,6 +24,10 @@ class AppTheme {
     brightness: Brightness.dark,
     primaryColor: AppColors.primaryColor,
     fontFamily: 'Poppins',
+    appBarTheme: const AppBarTheme(
+      color: Colors.transparent,
+      elevation: 0,
+    ),
     textSelectionTheme: textSelectionTheme,
     inputDecorationTheme: inputDecorationTheme,
     colorScheme: ColorScheme.fromSwatch(

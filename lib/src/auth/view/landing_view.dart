@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:todo/src/auth/view/email_auth_view.dart';
 import 'package:todo/src/core/presentation/theme/app_colors.dart';
 
 class LandingView extends StatelessWidget {
@@ -43,7 +44,13 @@ class LandingView extends StatelessWidget {
                 width: double.infinity,
                 height: 54,
                 child: ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push<EmailAuthView>(
+                      MaterialPageRoute(
+                        builder: (_) => const EmailAuthView(),
+                      ),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     primary: AppColors.primaryColor,
                     shape: RoundedRectangleBorder(
