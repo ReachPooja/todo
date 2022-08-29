@@ -16,6 +16,18 @@ class AppTheme {
     ),
   );
 
+  static final darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    primaryColor: AppColors.primaryColor,
+    fontFamily: 'Poppins',
+    textSelectionTheme: textSelectionTheme,
+    inputDecorationTheme: inputDecorationTheme,
+    colorScheme: ColorScheme.fromSwatch(
+      brightness: Brightness.dark,
+      accentColor: AppColors.accentColor,
+    ),
+  );
+
   static const textSelectionTheme = TextSelectionThemeData(
     cursorColor: AppColors.primaryColor,
     selectionHandleColor: AppColors.primaryColor,
