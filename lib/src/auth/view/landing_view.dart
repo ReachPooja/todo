@@ -7,6 +7,7 @@ class LandingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -21,6 +22,7 @@ class LandingView extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
+                  letterSpacing: 1.5,
                 ),
               ),
               const Text(
@@ -31,7 +33,9 @@ class LandingView extends StatelessWidget {
               ),
               Expanded(
                 child: SvgPicture.asset(
-                  'assets/images/landing.svg',
+                  isDarkMode
+                      ? 'assets/images/landing_dark.svg'
+                      : 'assets/images/landing.svg',
                   height: MediaQuery.of(context).size.height / 4,
                 ),
               ),
