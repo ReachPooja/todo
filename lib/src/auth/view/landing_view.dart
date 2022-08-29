@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo/src/auth/view/email_auth_view.dart';
+import 'package:todo/src/auth/view/widgets/skip_dialog.dart';
 import 'package:todo/src/core/presentation/theme/app_colors.dart';
 
 class LandingView extends StatelessWidget {
@@ -125,7 +126,9 @@ class LandingView extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await skipDialog(context, isDarkMode: isDarkMode);
+                },
                 style: TextButton.styleFrom(
                   primary: AppColors.accentColor,
                 ),
