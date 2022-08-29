@@ -37,39 +37,39 @@ class _EmailAuthViewState extends State<EmailAuthView> {
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Spacer(),
-            const Text(
-              'Continue with Email',
-              style: TextStyle(
-                fontSize: 24,
-              ),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            TextFormField(
-              focusNode: emailFocusNode,
-              cursorColor: AppColors.primaryColor,
-              decoration: InputDecoration(
-                labelText: 'Enter email',
-                floatingLabelStyle: TextStyle(
-                  color: emailFocusNode.hasFocus
-                      ? AppColors.accentColor
-                      : Colors.grey,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Spacer(),
+              const Text(
+                'Continue with Email',
+                style: TextStyle(
+                  fontSize: 24,
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 24,
-            ),
-            TextFormField(
-              focusNode: passwordFocusNode,
-              decoration: InputDecoration(
+              const SizedBox(
+                height: 16,
+              ),
+              TextFormField(
+                focusNode: emailFocusNode,
+                cursorColor: AppColors.primaryColor,
+                decoration: InputDecoration(
+                  labelText: 'Enter email',
+                  floatingLabelStyle: TextStyle(
+                    color: emailFocusNode.hasFocus
+                        ? AppColors.accentColor
+                        : Colors.grey,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              TextFormField(
+                focusNode: passwordFocusNode,
+                decoration: InputDecoration(
                   labelText: 'Password',
                   floatingLabelStyle: TextStyle(
                     color: passwordFocusNode.hasFocus
@@ -78,82 +78,84 @@ class _EmailAuthViewState extends State<EmailAuthView> {
                   ),
                   suffixIcon: IconButton(
                     onPressed: () {},
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.visibility_off_outlined,
                     ),
-                  )),
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  primary: AppColors.accentColor,
-                ),
-                onPressed: () {},
-                child: const Text(
-                  'Forgot Password?',
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 24,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: SizedBox(
-                    height: 54,
-                    child: OutlinedButton(
-                      onPressed: () {},
-                      style: OutlinedButton.styleFrom(
-                        primary: AppColors.primaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6),
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    primary: AppColors.accentColor,
+                  ),
+                  onPressed: () {},
+                  child: const Text(
+                    'Forgot Password?',
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: SizedBox(
+                      height: 54,
+                      child: OutlinedButton(
+                        onPressed: () {},
+                        style: OutlinedButton.styleFrom(
+                          primary: AppColors.primaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          side: const BorderSide(
+                            color: AppColors.primaryColor,
+                          ),
                         ),
-                        side: const BorderSide(
-                          color: AppColors.primaryColor,
-                        ),
-                      ),
-                      child: const Text(
-                        'Register',
-                        style: TextStyle(
-                          fontSize: 16,
+                        child: const Text(
+                          'Register',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  width: 16,
-                ),
-                Expanded(
-                  child: SizedBox(
-                    height: 54,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        primary: AppColors.primaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  Expanded(
+                    child: SizedBox(
+                      height: 54,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          primary: AppColors.primaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6),
+                          ),
                         ),
-                      ),
-                      child: const Text(
-                        'Login',
-                        style: TextStyle(
-                          fontSize: 16,
+                        child: const Text(
+                          'Login',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            const Spacer(
-              flex: 2,
-            ),
-          ],
+                ],
+              ),
+              const Spacer(
+                flex: 2,
+              ),
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }
