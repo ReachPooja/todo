@@ -10,10 +10,11 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:google_sign_in/google_sign_in.dart' as _i4;
 import 'package:injectable/injectable.dart' as _i2;
 
+import '../../src/auth/bloc/auth_bloc.dart' as _i7;
 import '../../src/auth/repository/auth_repository.dart' as _i6;
 import '../../src/auth/repository/i_auth_repository.dart' as _i5;
 import '../../src/core/infrastructure/third_party_injectable_module.dart'
-    as _i7; // ignore_for_file: unnecessary_lambdas
+    as _i8; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -27,7 +28,8 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => thirdPartyInjectableModule.googleSignIn);
   gh.lazySingleton<_i5.IAuthRepository>(() =>
       _i6.AuthRepository(get<_i3.FirebaseAuth>(), get<_i4.GoogleSignIn>()));
+  gh.factory<_i7.AuthBloc>(() => _i7.AuthBloc(get<_i5.IAuthRepository>()));
   return get;
 }
 
-class _$ThirdPartyInjectableModule extends _i7.ThirdPartyInjectableModule {}
+class _$ThirdPartyInjectableModule extends _i8.ThirdPartyInjectableModule {}
