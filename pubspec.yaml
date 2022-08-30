@@ -10,6 +10,7 @@ environment:
 dependencies:
   bloc: ^8.1.0
   cloud_firestore: ^3.4.5
+  dartz: ^0.10.1
   equatable: ^2.0.5
   firebase_app_check: ^0.0.6+20
   firebase_auth: ^3.6.4
@@ -22,6 +23,7 @@ dependencies:
     sdk: flutter
   flutter_svg: ^1.1.4
   formz: ^0.4.1
+  freezed_annotation: ^2.1.0
   get_it: ^7.2.0
   google_sign_in: ^5.4.1
   injectable: ^1.5.3
@@ -33,6 +35,7 @@ dev_dependencies:
   build_runner: ^2.2.0
   flutter_test:
     sdk: flutter
+  freezed: ^2.1.0+1
   injectable_generator: ^1.5.4
   json_serializable: ^6.3.1
   mocktail: ^0.3.0
