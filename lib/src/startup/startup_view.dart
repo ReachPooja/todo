@@ -5,8 +5,8 @@ import 'package:todo/src/auth/view/landing_view.dart';
 import 'package:todo/src/home/view/home_view.dart';
 import 'package:todo/src/startup/widgets/splash.dart';
 
-class Startup extends StatelessWidget {
-  const Startup({super.key});
+class StartupView extends StatelessWidget {
+  const StartupView({super.key});
 
   @override
   Widget build(BuildContext context) {

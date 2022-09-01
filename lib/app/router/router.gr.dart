@@ -17,29 +17,34 @@ class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    Startup.name: (routeData) {
+    StartupRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
-          routeData: routeData, child: const Startup());
+          routeData: routeData, child: const StartupView());
     },
     EmailAuthRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const EmailAuthView());
+    },
+    HomeRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const HomeView());
     }
   };
 
   @override
   List<RouteConfig> get routes => [
-        RouteConfig(Startup.name, path: '/'),
-        RouteConfig(EmailAuthRoute.name, path: '/email-auth-view')
+        RouteConfig(StartupRoute.name, path: '/'),
+        RouteConfig(EmailAuthRoute.name, path: '/email-auth-view'),
+        RouteConfig(HomeRoute.name, path: '/home-view')
       ];
 }
 
 /// generated route for
-/// [Startup]
-class Startup extends PageRouteInfo<void> {
-  const Startup() : super(Startup.name, path: '/');
+/// [StartupView]
+class StartupRoute extends PageRouteInfo<void> {
+  const StartupRoute() : super(StartupRoute.name, path: '/');
 
-  static const String name = 'Startup';
+  static const String name = 'StartupRoute';
 }
 
 /// generated route for
@@ -48,4 +53,12 @@ class EmailAuthRoute extends PageRouteInfo<void> {
   const EmailAuthRoute() : super(EmailAuthRoute.name, path: '/email-auth-view');
 
   static const String name = 'EmailAuthRoute';
+}
+
+/// generated route for
+/// [HomeView]
+class HomeRoute extends PageRouteInfo<void> {
+  const HomeRoute() : super(HomeRoute.name, path: '/home-view');
+
+  static const String name = 'HomeRoute';
 }

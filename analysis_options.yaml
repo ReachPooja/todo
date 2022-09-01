@@ -8,3 +8,4 @@ analyzer:
     - "**/*.gr.dart"
     - "**/*.g.dart"
     - "**/*.config.dart"
+    - "**/*.freezed.dart"

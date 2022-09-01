@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:todo/app/injector/injector.dart';
+import 'package:todo/app/app.dart';
 import 'package:todo/l10n/l10n.dart';
-import 'package:todo/src/auth/bloc/auth_bloc.dart';
-import 'package:todo/src/auth/view/landing_view.dart';
-import 'package:todo/src/core/presentation/styles/app_themes.dart';
+import 'package:todo/src/auth/auth.dart';
+import 'package:todo/src/core/presentation/styles/styles.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

@@ -1,10 +1,10 @@
 import 'package:another_flushbar/flushbar_helper.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:todo/src/auth/bloc/auth_bloc.dart';
-import 'package:todo/src/auth/view/email_auth_view.dart';
-import 'package:todo/src/auth/view/widgets/skip_dialog.dart';
+import 'package:todo/app/app.dart';
+import 'package:todo/src/auth/auth.dart';
 import 'package:todo/src/core/presentation/styles/app_colors.dart';
 
 class LandingView extends StatelessWidget {
@@ -16,23 +16,15 @@ class LandingView extends StatelessWidget {
     return BlocListener<AuthBloc, AuthState>(
       listenWhen: (p, c) => p.googleLoginStatus != c.googleLoginStatus,
       listener: (context, state) {
-      state.googleLoginStatus.maybeMap(
-          // loading: (_) => FlushbarHelper.createLoading(
-          //   message: 'Register in process..',
-          //   linearProgressIndicator: const LinearProgressIndicator(
-          //     color: AppColors.accentColor,
-          //   ),
-          // ).show(context),
-          success: (_) => FlushbarHelper.createSuccess(
-            message: 'Logged in',
-          ).show(context),
+        state.googleLoginStatus.maybeMap(
+          success: (_) => context.router.replace(const HomeRoute()),
           failure: (f) => f.failure.maybeMap(
             serverError: (value) {
               if (value.message == 'cancelled') {
                 return null;
               }
               return FlushbarHelper.createError(
-                message: value.message.toString(),
+                message: 'Something went wrong',
               ).show(context);
             },
             orElse: () => '',
@@ -76,10 +68,8 @@ class LandingView extends StatelessWidget {
                   height: 54,
                   child: ElevatedButton.icon(
                     onPressed: () {
-                      Navigator.of(context).push<EmailAuthView>(
-                        MaterialPageRoute(
-                          builder: (_) => const EmailAuthView(),
-                        ),
+                      context.router.push(
+                        const EmailAuthRoute(),
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -159,21 +149,21 @@ class LandingView extends StatelessWidget {
                     ],
                   ),
                 ),
-                TextButton(
-                  onPressed: () async {
-                    await skipDialog(context, isDarkMode: isDarkMode);
-                  },
-                  style: TextButton.styleFrom(
-                    primary: AppColors.accentColor,
-                  ),
-                  child: const Text(
-                    'Skip for now',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
+                // TextButton(
+                //   onPressed: () async {
+                //     await skipDialog(context, isDarkMode: isDarkMode);
+                //   },
+                //   style: TextButton.styleFrom(
+                //     primary: AppColors.accentColor,
+                //   ),
+                //   child: const Text(
+                //     'Skip for now',
+                //     style: TextStyle(
+                //       fontSize: 16,
+                //       fontWeight: FontWeight.w500,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),

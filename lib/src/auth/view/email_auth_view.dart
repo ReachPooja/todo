@@ -1,9 +1,8 @@
 import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo/src/auth/bloc/auth_bloc.dart';
-import 'package:todo/src/core/domain/form_inputs/email.dart';
-import 'package:todo/src/core/domain/form_inputs/password.dart';
+import 'package:todo/src/auth/auth.dart';
+import 'package:todo/src/core/domain/form_inputs/form_inputs.dart';
 import 'package:todo/src/core/presentation/styles/app_colors.dart';
 
 class EmailAuthView extends StatefulWidget {
@@ -171,7 +170,8 @@ class _EmailAuthViewState extends State<EmailAuthView> {
                         }
                         if (state.password.error ==
                             PasswordValidationError.short) {
-                          return 'Password should be at least 8 characters long';
+                          return 'Password should be at least '
+                              '8 characters long';
                         }
                         if (state.password.error ==
                             PasswordValidationError.invalid) {
