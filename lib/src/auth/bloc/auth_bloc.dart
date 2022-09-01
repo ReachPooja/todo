@@ -20,6 +20,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignInWithGoogleRequested>(_onSignInWithGoogleRequested);
     on<EmailChanged>(_onEmailChanged);
     on<PasswordChanged>(_onPasswordChanged);
+    on<ShowPasswordChanged>(_onShowPasswordChanged);
     on<RegisterWithEmailRequested>(_onRegisterWithEmailRequested);
     on<SignInWithEmailRequested>(_onSignInWithEmailRequested);
     on<ResetPasswordRequested>(_onResetPasswordRequested);
@@ -31,15 +32,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     SignInWithGoogleRequested event,
     Emitter<AuthState> emit,
   ) async {
+    emit(
+      state.copyWith(
+        googleLoginStatus: const Status.loading(),
+      ),
+    );
     final result = await _authRepository.loginWithGoogle();
-    result.fold(
-      (f) => emit(
-        state.copyWith(
+    emit(
+      result.fold(
+        (f) => state.copyWith(
           googleLoginStatus: Status.failure(f),
         ),
-      ),
-      (data) => emit(
-        state.copyWith(
+        (data) => state.copyWith(
           googleLoginStatus: const Status.success(),
           user: data,
         ),
@@ -47,7 +51,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
   }
 
-  FutureOr<void> _onEmailChanged(
+  void _onEmailChanged(
     EmailChanged event,
     Emitter<AuthState> emit,
   ) {
@@ -58,7 +62,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
   }
 
-  FutureOr<void> _onPasswordChanged(
+  void _onPasswordChanged(
     PasswordChanged event,
     Emitter<AuthState> emit,
   ) {
@@ -69,36 +73,51 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
   }
 
+  void _onShowPasswordChanged(
+    ShowPasswordChanged event,
+    Emitter<AuthState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        showPassword: !state.showPassword,
+      ),
+    );
+  }
+
   Future<void> _onRegisterWithEmailRequested(
     RegisterWithEmailRequested event,
     Emitter<AuthState> emit,
   ) async {
     final isFormValid = Formz.validate([state.email, state.password]).isValid;
     if (isFormValid) {
+      emit(
+        state.copyWith(
+          emailRegisterStatus: const Status.loading(),
+        ),
+      );
+      
       final result = await _authRepository.registerWithEmailAndPassword(
         email: state.email.value,
         password: state.password.value,
       );
 
-      result.fold(
-        (f) => emit(
-          state.copyWith(
+      emit(
+        result.fold(
+          (f) => state.copyWith(
             emailRegisterStatus: Status.failure(f),
+            showError: false,
           ),
-        ),
-        (data) => emit(
-          state.copyWith(
+          (data) => state.copyWith(
             emailRegisterStatus: const Status.success(),
             user: data,
+            showError: false,
           ),
         ),
       );
     } else {
       emit(
         state.copyWith(
-          emailRegisterStatus: const Status.failure(
-            Failure.localError(message: 'Invald input'),
-          ),
+          showError: true,
         ),
       );
     }
@@ -110,30 +129,33 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ) async {
     final isFormValid = Formz.validate([state.email, state.password]).isValid;
     if (isFormValid) {
+      emit(
+        state.copyWith(
+          emailLoginStatus: const Status.loading(),
+        ),
+      );
       final result = await _authRepository.loginWithEmailAndPassword(
         email: state.email.value,
         password: state.password.value,
       );
 
-      result.fold(
-        (f) => emit(
-          state.copyWith(
+      emit(
+        result.fold(
+          (f) => state.copyWith(
             emailLoginStatus: Status.failure(f),
+            showError: false,
           ),
-        ),
-        (data) => emit(
-          state.copyWith(
+          (data) => state.copyWith(
             emailLoginStatus: const Status.success(),
             user: data,
+            showError: false,
           ),
         ),
       );
     } else {
       emit(
         state.copyWith(
-          emailLoginStatus: const Status.failure(
-            Failure.localError(message: 'Invald input'),
-          ),
+          showError: true,
         ),
       );
     }
@@ -147,24 +169,25 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (isEmailValid) {
       final result = await _authRepository.resetPassword(state.email.value);
 
-      result.fold(
-        () => emit(
-          state.copyWith(
+      emit(
+        result.fold(
+          () => state.copyWith(
             resetPasswordStatus: const Status.success(),
+            showError: false,
           ),
-        ),
-        (f) => emit(
-          state.copyWith(
+          (f) => state.copyWith(
             resetPasswordStatus: Status.failure(f),
+            showError: false,
           ),
         ),
       );
     } else {
       emit(
         state.copyWith(
+          showError: true,
           resetPasswordStatus: const Status.failure(
             Failure.localError(
-              message: 'Please provide a valid email address',
+              message: 'Invalid email',
             ),
           ),
         ),

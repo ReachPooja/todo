@@ -27,6 +27,8 @@ class PasswordChanged extends AuthEvent {
   List<Object> get props => [password];
 }
 
+class ShowPasswordChanged extends AuthEvent {}
+
 class RegisterWithEmailRequested extends AuthEvent {}
 
 class SignInWithEmailRequested extends AuthEvent {}

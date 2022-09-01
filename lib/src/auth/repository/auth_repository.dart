@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:todo/src/auth/repository/i_auth_repository.dart';
@@ -29,7 +30,11 @@ class AuthRepository implements IAuthRepository {
 
       final user = result.user;
 
-      if (user != null) {
+      if (user == null) {
+        return left(
+          const Failure.unexpected('User not exist'),
+        );
+      } else {
         return right(
           my_user.User.empty.copyWith(
             id: user.uid,
@@ -38,14 +43,16 @@ class AuthRepository implements IAuthRepository {
             profileUrl: user.photoURL,
           ),
         );
-      } else {
-        return left(
-          const Failure.unexpected('User not exist'),
-        );
       }
     } on FirebaseAuthException catch (e) {
       return left(
         Failure.serverError(message: e.code),
+      );
+    } catch (e) {
+      return left(
+        Failure.unexpected(
+          e.toString(),
+        ),
       );
     }
   }
@@ -63,8 +70,13 @@ class AuthRepository implements IAuthRepository {
 
       final user = result.user;
 
-      if (user != null) {
-        await user.sendEmailVerification();
+      if (user == null) {
+        return left(
+          const Failure.unexpected(
+            'User not found',
+          ),
+        );
+      } else {
         return right(
           my_user.User.empty.copyWith(
             id: user.uid,
@@ -73,16 +85,16 @@ class AuthRepository implements IAuthRepository {
             profileUrl: user.photoURL,
           ),
         );
-      } else {
-        return left(
-          const Failure.unexpected(
-            'User not found',
-          ),
-        );
       }
     } on FirebaseAuthException catch (e) {
       return left(
         Failure.serverError(message: e.code),
+      );
+    } catch (e) {
+      return left(
+        Failure.unexpected(
+          e.toString(),
+        ),
       );
     }
   }
@@ -98,6 +110,12 @@ class AuthRepository implements IAuthRepository {
       return some(
         Failure.serverError(message: e.code),
       );
+    } catch (e) {
+      return some(
+        Failure.unexpected(
+          e.toString(),
+        ),
+      );
     }
   }
 
@@ -108,8 +126,8 @@ class AuthRepository implements IAuthRepository {
 
       if (googleUser == null) {
         return left(
-          const Failure.unexpected(
-            'User not exit',
+          const Failure.serverError(
+            message: 'cancelled',
           ),
         );
       }
@@ -123,7 +141,11 @@ class AuthRepository implements IAuthRepository {
 
       final cred = await _firebaseAuth.signInWithCredential(authcredential);
       final user = cred.user;
-      if (user != null) {
+      if (user == null) {
+        return left(
+          const Failure.unexpected('User not exits'),
+        );
+      } else {
         return right(
           my_user.User.empty.copyWith(
             id: user.uid,
@@ -132,14 +154,22 @@ class AuthRepository implements IAuthRepository {
             profileUrl: user.photoURL,
           ),
         );
-      } else {
-        return left(
-          const Failure.unexpected('User not exits'),
-        );
       }
     } on FirebaseAuthException catch (e) {
       return left(
         Failure.serverError(message: e.code),
+      );
+    } on PlatformException catch (e) {
+      return left(
+        Failure.serverError(
+          message: e.toString(),
+        ),
+      );
+    } catch (e) {
+      return left(
+        Failure.serverError(
+          message: e.toString(),
+        ),
       );
     }
   }

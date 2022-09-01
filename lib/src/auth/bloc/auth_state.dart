@@ -9,6 +9,8 @@ class AuthState extends Equatable {
     this.email = const Email.pure(),
     this.password = const Password.pure(),
     this.user = User.empty,
+    this.showError = false,
+    this.showPassword = false,
   });
 
   final Status googleLoginStatus;
@@ -18,6 +20,8 @@ class AuthState extends Equatable {
   final Email email;
   final Password password;
   final User user;
+  final bool showError;
+  final bool showPassword;
 
   AuthState copyWith({
     Status? googleLoginStatus,
@@ -27,6 +31,8 @@ class AuthState extends Equatable {
     Email? email,
     Password? password,
     User? user,
+    bool? showError,
+    bool? showPassword,
   }) {
     return AuthState(
       googleLoginStatus: googleLoginStatus ?? this.googleLoginStatus,
@@ -36,6 +42,8 @@ class AuthState extends Equatable {
       email: email ?? this.email,
       password: password ?? this.password,
       user: user ?? this.user,
+      showError: showError ?? this.showError,
+      showPassword: showPassword ?? this.showPassword,
     );
   }
 
@@ -49,6 +57,13 @@ class AuthState extends Equatable {
       email,
       password,
       user,
+      showError,
+      showPassword,
     ];
+  }
+
+  @override
+  String toString() {
+    return 'AuthState(googleLoginStatus: $googleLoginStatus, emailLoginStatus: $emailLoginStatus, emailRegisterStatus: $emailRegisterStatus, resetPasswordStatus: $resetPasswordStatus, email: $email, password: $password, user: $user, showError: $showError, showPassword: $showPassword)';
   }
 }
