@@ -18,6 +18,23 @@ class AuthRepository implements IAuthRepository {
   final GoogleSignIn _googleSignIn;
 
   @override
+  Option<my_user.User> isUserAutheticated() {
+    final user = _firebaseAuth.currentUser;
+    if (user == null) {
+      return none();
+    } else {
+      return some(
+        my_user.User.empty.copyWith(
+          id: user.uid,
+          email: user.email,
+          name: user.displayName,
+          profileUrl: user.photoURL,
+        ),
+      );
+    }
+  }
+
+  @override
   Future<Either<Failure, my_user.User>> loginWithEmailAndPassword({
     required String email,
     required String password,

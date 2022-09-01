@@ -17,20 +17,35 @@ class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    LandingRoute.name: (routeData) {
+    Startup.name: (routeData) {
       return MaterialPageX<dynamic>(
-          routeData: routeData, child: const LandingView());
+          routeData: routeData, child: const Startup());
+    },
+    EmailAuthRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const EmailAuthView());
     }
   };
 
   @override
-  List<RouteConfig> get routes => [RouteConfig(LandingRoute.name, path: '/')];
+  List<RouteConfig> get routes => [
+        RouteConfig(Startup.name, path: '/'),
+        RouteConfig(EmailAuthRoute.name, path: '/email-auth-view')
+      ];
 }
 
 /// generated route for
-/// [LandingView]
-class LandingRoute extends PageRouteInfo<void> {
-  const LandingRoute() : super(LandingRoute.name, path: '/');
+/// [Startup]
+class Startup extends PageRouteInfo<void> {
+  const Startup() : super(Startup.name, path: '/');
 
-  static const String name = 'LandingRoute';
+  static const String name = 'Startup';
+}
+
+/// generated route for
+/// [EmailAuthView]
+class EmailAuthRoute extends PageRouteInfo<void> {
+  const EmailAuthRoute() : super(EmailAuthRoute.name, path: '/email-auth-view');
+
+  static const String name = 'EmailAuthRoute';
 }

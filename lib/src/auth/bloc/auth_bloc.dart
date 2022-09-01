@@ -17,6 +17,7 @@ part 'auth_state.dart';
 @injectable
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc(this._authRepository) : super(const AuthState()) {
+    on<AuthCheckRequested>(_onAuthCheckRequested);
     on<SignInWithGoogleRequested>(_onSignInWithGoogleRequested);
     on<EmailChanged>(_onEmailChanged);
     on<PasswordChanged>(_onPasswordChanged);
@@ -27,6 +28,25 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   final IAuthRepository _authRepository;
+
+  void _onAuthCheckRequested(
+    AuthCheckRequested event,
+    Emitter<AuthState> emit,
+  ) {
+    final result = _authRepository.isUserAutheticated();
+
+    emit(
+      result.fold(
+        () => state.copyWith(
+          isUserAuthenticated: false,
+        ),
+        (user) => state.copyWith(
+          user: user,
+          isUserAuthenticated: true,
+        ),
+      ),
+    );
+  }
 
   Future<void> _onSignInWithGoogleRequested(
     SignInWithGoogleRequested event,
@@ -95,7 +115,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emailRegisterStatus: const Status.loading(),
         ),
       );
-      
+
       final result = await _authRepository.registerWithEmailAndPassword(
         email: state.email.value,
         password: state.password.value,

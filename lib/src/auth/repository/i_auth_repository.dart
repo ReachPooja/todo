@@ -3,6 +3,8 @@ import 'package:todo/src/core/domain/failures/failures.dart';
 import 'package:todo/src/user/user.dart';
 
 abstract class IAuthRepository {
+  Option<User> isUserAutheticated();
+
   Future<Either<Failure, User>> registerWithEmailAndPassword({
     required String email,
     required String password,
