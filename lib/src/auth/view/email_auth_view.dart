@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/app/router/router.dart';
 import 'package:todo/src/auth/auth.dart';
 import 'package:todo/src/core/domain/form_inputs/form_inputs.dart';
-import 'package:todo/src/core/presentation/layout/spacing.dart';
 import 'package:todo/src/core/presentation/styles/app_colors.dart';
 
 class EmailAuthView extends StatefulWidget {
@@ -286,7 +285,7 @@ class _EmailAuthViewState extends State<EmailAuthView> {
                                   ShowPasswordChanged(),
                                 );
                           },
-                          icon:  Icon(
+                          icon: Icon(
                             state.showPassword
                                 ? Icons.visibility_outlined
                                 : Icons.visibility_off_outlined,

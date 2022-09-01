@@ -1,14 +1,7 @@
-import 'dart:developer';
-
-import 'package:another_flushbar/flushbar_helper.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo/app/app.dart';
 import 'package:todo/src/auth/auth.dart';
 import 'package:todo/src/core/domain/form_inputs/form_inputs.dart';
-import 'package:todo/src/core/presentation/layout/spacing.dart';
-import 'package:todo/src/core/presentation/styles/styles.dart';
 
 class ResetPasswordView extends StatelessWidget {
   const ResetPasswordView({
