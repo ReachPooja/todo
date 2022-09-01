@@ -286,8 +286,10 @@ class _EmailAuthViewState extends State<EmailAuthView> {
                                   ShowPasswordChanged(),
                                 );
                           },
-                          icon: const Icon(
-                            Icons.visibility_off_outlined,
+                          icon:  Icon(
+                            state.showPassword
+                                ? Icons.visibility_outlined
+                                : Icons.visibility_off_outlined,
                           ),
                         ),
                       ),

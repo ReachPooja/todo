@@ -17,6 +17,12 @@ class LandingView extends StatelessWidget {
       listenWhen: (p, c) => p.googleLoginStatus != c.googleLoginStatus,
       listener: (context, state) {
         state.googleLoginStatus.maybeMap(
+          loading: (_) => FlushbarHelper.createLoading(
+            message: 'Loading...',
+          linearProgressIndicator: const LinearProgressIndicator(
+              color: AppColors.accentColor,
+            ),
+          ),
           success: (_) => context.router.replace(const HomeRoute()),
           failure: (f) => f.failure.maybeMap(
             serverError: (value) {
