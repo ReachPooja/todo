@@ -8,5 +8,7 @@ class Status with _$Status {
   const factory Status.initial() = _Initial;
   const factory Status.loading() = _Loading;
   const factory Status.success() = _Success;
-  const factory Status.failure([Failure? failure]) = _StatusFailure;
+  const factory Status.failure([
+    @Default(Failure.unexpected('')) Failure failure,
+  ]) = _StatusFailure;
 }

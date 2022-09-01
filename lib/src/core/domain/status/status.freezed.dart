@@ -21,7 +21,7 @@ mixin _$Status {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function(Failure? failure) failure,
+    required TResult Function(Failure failure) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +29,7 @@ mixin _$Status {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function(Failure? failure)? failure,
+    TResult Function(Failure failure)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +37,7 @@ mixin _$Status {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function(Failure? failure)? failure,
+    TResult Function(Failure failure)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -125,7 +125,7 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function(Failure? failure) failure,
+    required TResult Function(Failure failure) failure,
   }) {
     return initial();
   }
@@ -136,7 +136,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function(Failure? failure)? failure,
+    TResult Function(Failure failure)? failure,
   }) {
     return initial?.call();
   }
@@ -147,7 +147,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function(Failure? failure)? failure,
+    TResult Function(Failure failure)? failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -240,7 +240,7 @@ class _$_Loading implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function(Failure? failure) failure,
+    required TResult Function(Failure failure) failure,
   }) {
     return loading();
   }
@@ -251,7 +251,7 @@ class _$_Loading implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function(Failure? failure)? failure,
+    TResult Function(Failure failure)? failure,
   }) {
     return loading?.call();
   }
@@ -262,7 +262,7 @@ class _$_Loading implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function(Failure? failure)? failure,
+    TResult Function(Failure failure)? failure,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -355,7 +355,7 @@ class _$_Success implements _Success {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function(Failure? failure) failure,
+    required TResult Function(Failure failure) failure,
   }) {
     return success();
   }
@@ -366,7 +366,7 @@ class _$_Success implements _Success {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function(Failure? failure)? failure,
+    TResult Function(Failure failure)? failure,
   }) {
     return success?.call();
   }
@@ -377,7 +377,7 @@ class _$_Success implements _Success {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function(Failure? failure)? failure,
+    TResult Function(Failure failure)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -433,9 +433,9 @@ abstract class _$$_StatusFailureCopyWith<$Res> {
   factory _$$_StatusFailureCopyWith(
           _$_StatusFailure value, $Res Function(_$_StatusFailure) then) =
       __$$_StatusFailureCopyWithImpl<$Res>;
-  $Res call({Failure? failure});
+  $Res call({Failure failure});
 
-  $FailureCopyWith<$Res>? get failure;
+  $FailureCopyWith<$Res> get failure;
 }
 
 /// @nodoc
@@ -456,17 +456,13 @@ class __$$_StatusFailureCopyWithImpl<$Res> extends _$StatusCopyWithImpl<$Res>
       failure == freezed
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
-              as Failure?,
+              as Failure,
     ));
   }
 
   @override
-  $FailureCopyWith<$Res>? get failure {
-    if (_value.failure == null) {
-      return null;
-    }
-
-    return $FailureCopyWith<$Res>(_value.failure!, (value) {
+  $FailureCopyWith<$Res> get failure {
+    return $FailureCopyWith<$Res>(_value.failure, (value) {
       return _then(_value.copyWith(failure: value));
     });
   }
@@ -475,10 +471,11 @@ class __$$_StatusFailureCopyWithImpl<$Res> extends _$StatusCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_StatusFailure implements _StatusFailure {
-  const _$_StatusFailure([this.failure]);
+  const _$_StatusFailure([this.failure = const Failure.unexpected('')]);
 
   @override
-  final Failure? failure;
+  @JsonKey()
+  final Failure failure;
 
   @override
   String toString() {
@@ -508,7 +505,7 @@ class _$_StatusFailure implements _StatusFailure {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function(Failure? failure) failure,
+    required TResult Function(Failure failure) failure,
   }) {
     return failure(this.failure);
   }
@@ -519,7 +516,7 @@ class _$_StatusFailure implements _StatusFailure {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function(Failure? failure)? failure,
+    TResult Function(Failure failure)? failure,
   }) {
     return failure?.call(this.failure);
   }
@@ -530,7 +527,7 @@ class _$_StatusFailure implements _StatusFailure {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function(Failure? failure)? failure,
+    TResult Function(Failure failure)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -578,9 +575,9 @@ class _$_StatusFailure implements _StatusFailure {
 }
 
 abstract class _StatusFailure implements Status {
-  const factory _StatusFailure([final Failure? failure]) = _$_StatusFailure;
+  const factory _StatusFailure([final Failure failure]) = _$_StatusFailure;
 
-  Failure? get failure;
+  Failure get failure;
   @JsonKey(ignore: true)
   _$$_StatusFailureCopyWith<_$_StatusFailure> get copyWith =>
       throw _privateConstructorUsedError;
