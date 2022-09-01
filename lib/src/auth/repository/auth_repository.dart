@@ -117,18 +117,18 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
-  Future<Option<Failure>> resetPassword(String email) async {
+  Future<Either<Failure, Unit>> resetPassword(String email) async {
     try {
       await _firebaseAuth.sendPasswordResetEmail(
         email: email,
       );
-      return none();
+      return right(unit);
     } on FirebaseAuthException catch (e) {
-      return some(
+      return left(
         Failure.serverError(message: e.code),
       );
     } catch (e) {
-      return some(
+      return left(
         Failure.unexpected(
           e.toString(),
         ),

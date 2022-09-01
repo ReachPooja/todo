@@ -8,6 +8,7 @@ class AuthState extends Equatable {
     this.emailRegisterStatus = const Status.initial(),
     this.resetPasswordStatus = const Status.initial(),
     this.email = const Email.pure(),
+    this.resetEmail = const Email.pure(),
     this.password = const Password.pure(),
     this.user = User.empty,
     this.showError = false,
@@ -21,6 +22,7 @@ class AuthState extends Equatable {
   final Status emailRegisterStatus;
   final Status resetPasswordStatus;
   final Email email;
+  final Email resetEmail;
   final Password password;
   final User user;
   final bool showError;
@@ -36,6 +38,7 @@ class AuthState extends Equatable {
       emailRegisterStatus,
       resetPasswordStatus,
       email,
+      resetEmail,
       password,
       user,
       showError,
@@ -51,6 +54,7 @@ class AuthState extends Equatable {
     Status? emailRegisterStatus,
     Status? resetPasswordStatus,
     Email? email,
+    Email? resetEmail,
     Password? password,
     User? user,
     bool? showError,
@@ -64,6 +68,7 @@ class AuthState extends Equatable {
       emailRegisterStatus: emailRegisterStatus ?? this.emailRegisterStatus,
       resetPasswordStatus: resetPasswordStatus ?? this.resetPasswordStatus,
       email: email ?? this.email,
+      resetEmail: resetEmail ?? this.resetEmail,
       password: password ?? this.password,
       user: user ?? this.user,
       showError: showError ?? this.showError,
@@ -74,11 +79,6 @@ class AuthState extends Equatable {
 
   @override
   String toString() {
-    return 'AuthState(authCheckStatus: $authCheckStatus, googleLoginStatus:'
-        ' $googleLoginStatus, emailLoginStatus: $emailLoginStatus,'
-        ' emailRegisterStatus: $emailRegisterStatus, resetPasswordStatus: '
-        '$resetPasswordStatus, email: $email, password: $password, user: $user,'
-        ' showError: $showError, showPassword: $showPassword, '
-        'isUserAuthenticated: $isUserAuthenticated)';
+    return 'AuthState(authCheckStatus: $authCheckStatus, googleLoginStatus: $googleLoginStatus, emailLoginStatus: $emailLoginStatus, emailRegisterStatus: $emailRegisterStatus, resetPasswordStatus: $resetPasswordStatus, email: $email, resetEmail: $resetEmail, password: $password, user: $user, showError: $showError, showPassword: $showPassword, isUserAuthenticated: $isUserAuthenticated)';
   }
 }

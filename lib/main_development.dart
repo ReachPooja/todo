@@ -13,5 +13,5 @@ Future<void> main() async {
 
   await FirebaseAppCheck.instance.activate();
 
-  await bootstrap(() => const App());
+  await bootstrap(App.new);
 }

@@ -38,9 +38,7 @@ class LandingView extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                const SizedBox(
-                  height: 30,
-                ),
+                const Spacer(),
                 const Text(
                   'Hello!',
                   style: TextStyle(
@@ -56,11 +54,12 @@ class LandingView extends StatelessWidget {
                   ),
                 ),
                 Expanded(
+                  flex: 6,
                   child: SvgPicture.asset(
                     isDarkMode
                         ? 'assets/images/landing_dark.svg'
                         : 'assets/images/landing.svg',
-                    height: MediaQuery.of(context).size.height / 4,
+                    height: MediaQuery.of(context).size.height / 2,
                   ),
                 ),
                 SizedBox(
@@ -68,11 +67,42 @@ class LandingView extends StatelessWidget {
                   height: 54,
                   child: ElevatedButton.icon(
                     onPressed: () {
+                      context.read<AuthBloc>().add(
+                            SignInWithGoogleRequested(),
+                          );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: AppColors.primaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                    ),
+                    icon: SvgPicture.asset(
+                      'assets/icons/google.svg',
+                      height: 20,
+                      color: Colors.white,
+                    ),
+                    label: const Text(
+                      'Continue with Google',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  height: 54,
+                  child: OutlinedButton.icon(
+                    onPressed: () {
                       context.router.push(
                         const EmailAuthRoute(),
                       );
                     },
-                    style: ElevatedButton.styleFrom(
+                    style: OutlinedButton.styleFrom(
                       primary: AppColors.primaryColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6),
@@ -89,81 +119,6 @@ class LandingView extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 16,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  height: 54,
-                  child: OutlinedButton.icon(
-                    onPressed: () {
-                      context.read<AuthBloc>().add(
-                            SignInWithGoogleRequested(),
-                          );
-                    },
-                    style: OutlinedButton.styleFrom(
-                      primary: AppColors.primaryColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                    ),
-                    icon: SvgPicture.asset(
-                      'assets/icons/google.svg',
-                      height: 20,
-                    ),
-                    label: const Text(
-                      'Continue with Google',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 24,
-                    bottom: 16,
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Divider(
-                          endIndent: 10,
-                          indent: 80,
-                          color: Colors.grey.shade400,
-                        ),
-                      ),
-                      Text(
-                        'Or',
-                        style: TextStyle(
-                          color: Colors.grey.shade400,
-                        ),
-                      ),
-                      Expanded(
-                        child: Divider(
-                          indent: 10,
-                          color: Colors.grey.shade400,
-                          endIndent: 80,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                // TextButton(
-                //   onPressed: () async {
-                //     await skipDialog(context, isDarkMode: isDarkMode);
-                //   },
-                //   style: TextButton.styleFrom(
-                //     primary: AppColors.accentColor,
-                //   ),
-                //   child: const Text(
-                //     'Skip for now',
-                //     style: TextStyle(
-                //       fontSize: 16,
-                //       fontWeight: FontWeight.w500,
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),

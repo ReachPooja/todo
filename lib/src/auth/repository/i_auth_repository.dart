@@ -15,7 +15,7 @@ abstract class IAuthRepository {
     required String password,
   });
 
-  Future<Option<Failure>> resetPassword(String email);
+  Future<Either<Failure, Unit>> resetPassword(String email);
 
   Future<Either<Failure, User>> loginWithGoogle();
 

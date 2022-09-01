@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -7,7 +8,9 @@ import 'package:todo/src/auth/auth.dart';
 import 'package:todo/src/core/presentation/styles/styles.dart';
 
 class App extends StatelessWidget {
-  const App({super.key});
+  App({super.key});
+
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,7 @@ class App extends StatelessWidget {
           create: (context) => getIt<AuthBloc>(),
         ),
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
         theme: AppTheme.ligthTheme,
         darkTheme: AppTheme.darkTheme,
         debugShowCheckedModeBanner: false,
@@ -26,7 +29,8 @@ class App extends StatelessWidget {
           GlobalMaterialLocalizations.delegate,
         ],
         supportedLocales: AppLocalizations.supportedLocales,
-        home: const LandingView(),
+        routerDelegate: AutoRouterDelegate(_appRouter),
+        routeInformationParser: _appRouter.defaultRouteParser(),
       ),
     );
   }

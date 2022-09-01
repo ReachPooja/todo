@@ -4,11 +4,11 @@ class AppTypography {
   AppTypography._();
 
   //* Family
-  static const fontFamily = 'Ubuntu';
+  static const fontFamily = 'Poppins';
 
   //* Body font sizes
   static const smallBodyFontSize = 14.0;
-  static const mediumBodyFontSize = 46.0;
+  static const mediumBodyFontSize = 16.0;
   static const largeBodyFontSize = 18.0;
 
   //* Title font sizes

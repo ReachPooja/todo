@@ -20,6 +20,15 @@ class EmailChanged extends AuthEvent {
   List<Object> get props => [email];
 }
 
+class ResetEmailChanged extends AuthEvent {
+  const ResetEmailChanged({
+    required this.email,
+  });
+  final String email;
+  @override
+  List<Object> get props => [email];
+}
+
 class PasswordChanged extends AuthEvent {
   const PasswordChanged({
     required this.password,

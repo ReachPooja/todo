@@ -5,8 +5,19 @@ import 'package:todo/src/auth/view/landing_view.dart';
 import 'package:todo/src/home/view/home_view.dart';
 import 'package:todo/src/startup/widgets/splash.dart';
 
-class StartupView extends StatelessWidget {
+class StartupView extends StatefulWidget {
   const StartupView({super.key});
+
+  @override
+  State<StartupView> createState() => _StartupViewState();
+}
+
+class _StartupViewState extends State<StartupView> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<AuthBloc>().add(AuthCheckRequested());
+  }
 
   @override
   Widget build(BuildContext context) {

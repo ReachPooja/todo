@@ -20,6 +20,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthCheckRequested>(_onAuthCheckRequested);
     on<SignInWithGoogleRequested>(_onSignInWithGoogleRequested);
     on<EmailChanged>(_onEmailChanged);
+    on<ResetEmailChanged>(_onResetEmailChanged);
     on<PasswordChanged>(_onPasswordChanged);
     on<ShowPasswordChanged>(_onShowPasswordChanged);
     on<RegisterWithEmailRequested>(_onRegisterWithEmailRequested);
@@ -78,6 +79,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(
       state.copyWith(
         email: Email.dirty(event.email),
+      ),
+    );
+  }
+
+  void _onResetEmailChanged(
+    ResetEmailChanged event,
+    Emitter<AuthState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        resetEmail: Email.dirty(event.email),
       ),
     );
   }
@@ -185,26 +197,35 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     ResetPasswordRequested event,
     Emitter<AuthState> emit,
   ) async {
-    final isEmailValid = state.email.valid;
+    emit(
+      state.copyWith(
+        resetEmail: state.email,
+      ),
+    );
+
+    final isEmailValid = state.resetEmail.valid;
     if (isEmailValid) {
-      final result = await _authRepository.resetPassword(state.email.value);
+      emit(
+        state.copyWith(
+          resetPasswordStatus: const Status.loading(),
+        ),
+      );
+      final result =
+          await _authRepository.resetPassword(state.resetEmail.value);
 
       emit(
         result.fold(
-          () => state.copyWith(
-            resetPasswordStatus: const Status.success(),
-            showError: false,
-          ),
           (f) => state.copyWith(
             resetPasswordStatus: Status.failure(f),
-            showError: false,
+          ),
+          (r) => state.copyWith(
+            resetPasswordStatus: const Status.success(),
           ),
         ),
       );
     } else {
       emit(
         state.copyWith(
-          showError: true,
           resetPasswordStatus: const Status.failure(
             Failure.localError(
               message: 'Invalid email',

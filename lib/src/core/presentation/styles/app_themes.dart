@@ -28,7 +28,7 @@ class AppTheme {
   static final darkTheme = ThemeData(
     brightness: Brightness.dark,
     primaryColor: AppColors.primaryColor,
-    fontFamily: 'Poppins',
+    fontFamily: AppTypography.fontFamily,
     appBarTheme: const AppBarTheme(
       color: Colors.transparent,
       elevation: 0,
