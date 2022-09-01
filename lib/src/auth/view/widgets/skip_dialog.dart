@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo/src/core/presentation/theme/app_colors.dart';
+import 'package:todo/src/core/presentation/styles/app_colors.dart';
 
 Future<void> skipDialog(
   BuildContext context, {
