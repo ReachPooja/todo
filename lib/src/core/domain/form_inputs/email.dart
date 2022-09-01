@@ -1,6 +1,6 @@
 import 'package:formz/formz.dart';
 
-enum EmailValidationError { invalid }
+enum EmailValidationError { empty, invalid }
 
 /// Form input for validation of email address
 class Email extends FormzInput<String, EmailValidationError> {
@@ -13,8 +13,12 @@ class Email extends FormzInput<String, EmailValidationError> {
 
   @override
   EmailValidationError? validator(String? value) {
-    return _emailRegExp.hasMatch(value ?? '')
-        ? null
-        : EmailValidationError.invalid;
+    if (value == null || value.isEmpty) {
+      return EmailValidationError.empty;
+    }
+    if (!_emailRegExp.hasMatch(value)) {
+      return EmailValidationError.invalid;
+    }
+    return null;
   }
 }
