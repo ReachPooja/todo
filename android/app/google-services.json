@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "453181205902-q9e0gb966d4k0traeco5sbfcdp6ep3vt.apps.googleusercontent.com",
+          "client_id": "453181205902-8e6s7p2i63lgf0c6guct9rej5flqa1tm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.poojaprajapat.todo",
-            "certificate_hash": "19711e71c74e361221cb87632d62b58f874783d4"
+            "certificate_hash": "fe8dbcf10c2bbca7d1f9d6cb60f27e1b399fc4ce"
           }
         },
         {
