@@ -28,6 +28,10 @@ class _$AppRouter extends RootStackRouter {
     HomeRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const HomeView());
+    },
+    CreateTodoRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const CreateTodoView());
     }
   };
 
@@ -35,7 +39,8 @@ class _$AppRouter extends RootStackRouter {
   List<RouteConfig> get routes => [
         RouteConfig(StartupRoute.name, path: '/'),
         RouteConfig(EmailAuthRoute.name, path: '/email-auth-view'),
-        RouteConfig(HomeRoute.name, path: '/home-view')
+        RouteConfig(HomeRoute.name, path: '/home-view'),
+        RouteConfig(CreateTodoRoute.name, path: '/create-todo-view')
       ];
 }
 
@@ -61,4 +66,13 @@ class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute() : super(HomeRoute.name, path: '/home-view');
 
   static const String name = 'HomeRoute';
+}
+
+/// generated route for
+/// [CreateTodoView]
+class CreateTodoRoute extends PageRouteInfo<void> {
+  const CreateTodoRoute()
+      : super(CreateTodoRoute.name, path: '/create-todo-view');
+
+  static const String name = 'CreateTodoRoute';
 }
