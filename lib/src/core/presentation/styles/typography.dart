@@ -14,7 +14,7 @@ class AppTypography {
   //* Title font sizes
   static const smallTitleFontSize = 18.0;
   static const mediumTitleFontSize = 20.0;
-  static const largeTitleFontSize = 22.0;
+  static const largeTitleFontSize = 24.0;
 
   //* Caption font size
   static const captionFontSize = 12.0;

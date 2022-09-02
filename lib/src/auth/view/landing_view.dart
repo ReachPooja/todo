@@ -5,7 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo/app/app.dart';
 import 'package:todo/src/auth/auth.dart';
-import 'package:todo/src/core/presentation/styles/app_colors.dart';
+import 'package:todo/src/core/presentation/layout/spacing.dart';
+import 'package:todo/src/core/presentation/styles/styles.dart';
 
 class LandingView extends StatelessWidget {
   const LandingView({super.key});
@@ -19,7 +20,7 @@ class LandingView extends StatelessWidget {
         state.googleLoginStatus.maybeMap(
           loading: (_) => FlushbarHelper.createLoading(
             message: 'Loading...',
-          linearProgressIndicator: const LinearProgressIndicator(
+            linearProgressIndicator: const LinearProgressIndicator(
               color: AppColors.accentColor,
             ),
           ),
@@ -55,9 +56,7 @@ class LandingView extends StatelessWidget {
                 ),
                 const Text(
                   'Welcome to todo app',
-                  style: TextStyle(
-                    fontSize: 24,
-                  ),
+                  style: AppTypography.largeBodyTextStyle,
                 ),
                 Expanded(
                   flex: 6,
@@ -77,12 +76,6 @@ class LandingView extends StatelessWidget {
                             SignInWithGoogleRequested(),
                           );
                     },
-                    style: ElevatedButton.styleFrom(
-                      primary: AppColors.primaryColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                    ),
                     icon: SvgPicture.asset(
                       'assets/icons/google.svg',
                       height: 20,
@@ -90,15 +83,11 @@ class LandingView extends StatelessWidget {
                     ),
                     label: const Text(
                       'Continue with Google',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
+                      style: AppTypography.mediumBodyTextStyle,
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 16,
-                ),
+                verticalSpaceRegular,
                 SizedBox(
                   width: double.infinity,
                   height: 54,
@@ -108,20 +97,12 @@ class LandingView extends StatelessWidget {
                         const EmailAuthRoute(),
                       );
                     },
-                    style: OutlinedButton.styleFrom(
-                      primary: AppColors.primaryColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                    ),
                     icon: const Icon(
                       Icons.email_outlined,
                     ),
                     label: const Text(
                       'Continue with Email',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
+                      style: AppTypography.mediumBodyTextStyle,
                     ),
                   ),
                 ),

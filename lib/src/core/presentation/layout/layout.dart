@@ -7,7 +7,7 @@ class Layout {
 
   //* Radius
   static const baseRadius = 12.0;
-  static const smallRadius = 8.0;
+  static const smallRadius = 6.0;
   static const circularRadius = 100.0;
 
   //* Border Radius

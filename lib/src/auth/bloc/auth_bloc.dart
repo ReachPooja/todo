@@ -5,7 +5,6 @@ import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:todo/src/auth/repository/i_auth_repository.dart';
-import 'package:todo/src/core/domain/failures/failures.dart';
 import 'package:todo/src/core/domain/form_inputs/email.dart';
 import 'package:todo/src/core/domain/form_inputs/password.dart';
 import 'package:todo/src/core/domain/status/status.dart';
@@ -220,16 +219,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           ),
           (r) => state.copyWith(
             resetPasswordStatus: const Status.success(),
-          ),
-        ),
-      );
-    } else {
-      emit(
-        state.copyWith(
-          resetPasswordStatus: const Status.failure(
-            Failure.localError(
-              message: 'Invalid email',
-            ),
           ),
         ),
       );

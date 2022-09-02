@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/src/auth/auth.dart';
 import 'package:todo/src/core/domain/form_inputs/form_inputs.dart';
+import 'package:todo/src/core/presentation/styles/styles.dart';
 
 class ResetPasswordView extends StatelessWidget {
-  const ResetPasswordView({
-    super.key,
-  });
+  const ResetPasswordView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +22,15 @@ class ResetPasswordView extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text(
-              'Reset Password',
-              style: TextStyle(
-                fontSize: 20,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                Text(
+                  'Reset Password',
+                  style: AppTypography.mediumTitleTextStyle,
+                ),
+                CloseButton(),
+              ],
             ),
             BlocBuilder<AuthBloc, AuthState>(
               builder: (context, state) {
@@ -64,15 +67,14 @@ class ResetPasswordView extends StatelessWidget {
               height: 54,
               child: ElevatedButton(
                 onPressed: () {
+                  FocusManager.instance.primaryFocus?.unfocus();
                   context.read<AuthBloc>().add(
                         ResetPasswordRequested(),
                       );
                 },
                 child: const Text(
                   'Send Reset Email',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
+                  style: AppTypography.mediumBodyTextStyle,
                 ),
               ),
             ),

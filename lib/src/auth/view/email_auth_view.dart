@@ -5,41 +5,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/app/router/router.dart';
 import 'package:todo/src/auth/auth.dart';
 import 'package:todo/src/core/domain/form_inputs/form_inputs.dart';
-import 'package:todo/src/core/presentation/styles/app_colors.dart';
+import 'package:todo/src/core/presentation/layout/spacing.dart';
+import 'package:todo/src/core/presentation/styles/styles.dart';
 
-class EmailAuthView extends StatefulWidget {
+class EmailAuthView extends StatelessWidget {
   const EmailAuthView({super.key});
 
   @override
-  State<EmailAuthView> createState() => _EmailAuthViewState();
-}
-
-class _EmailAuthViewState extends State<EmailAuthView> {
-  late FocusNode emailFocusNode;
-  late FocusNode passwordFocusNode;
-
-  @override
-  void initState() {
-    super.initState();
-    emailFocusNode = FocusNode()
-      ..addListener(() {
-        setState(() {});
-      });
-    passwordFocusNode = FocusNode()
-      ..addListener(() {
-        setState(() {});
-      });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    emailFocusNode.dispose();
-    passwordFocusNode.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final authBloc = context.read<AuthBloc>();
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(),
@@ -207,22 +182,18 @@ class _EmailAuthViewState extends State<EmailAuthView> {
                 const Spacer(),
                 const Text(
                   'Continue with Email',
-                  style: TextStyle(
-                    fontSize: 24,
-                  ),
+                  style: AppTypography.mediumTitleTextStyle,
                 ),
-                const SizedBox(
-                  height: 16,
-                ),
+                verticalSpaceRegular,
                 BlocBuilder<AuthBloc, AuthState>(
                   builder: (context, state) {
                     return TextFormField(
                       autovalidateMode: state.showError
                           ? AutovalidateMode.always
                           : AutovalidateMode.disabled,
-                      onChanged: (value) => context.read<AuthBloc>().add(
-                            EmailChanged(email: value),
-                          ),
+                      onChanged: (value) => authBloc.add(
+                        EmailChanged(email: value),
+                      ),
                       validator: (value) {
                         if (state.email.error == EmailValidationError.empty) {
                           return 'Enter an email';
@@ -232,25 +203,22 @@ class _EmailAuthViewState extends State<EmailAuthView> {
                         }
                         return null;
                       },
-                      focusNode: emailFocusNode,
                       decoration: const InputDecoration(
                         labelText: 'Email',
                       ),
                     );
                   },
                 ),
-                const SizedBox(
-                  height: 24,
-                ),
+                verticalSpaceRegular,
                 BlocBuilder<AuthBloc, AuthState>(
                   builder: (context, state) {
                     return TextFormField(
                       autovalidateMode: state.showError
                           ? AutovalidateMode.always
                           : AutovalidateMode.disabled,
-                      onChanged: (value) => context.read<AuthBloc>().add(
-                            PasswordChanged(password: value),
-                          ),
+                      onChanged: (value) => authBloc.add(
+                        PasswordChanged(password: value),
+                      ),
                       validator: (value) {
                         if (state.password.error ==
                             PasswordValidationError.empty) {
@@ -276,14 +244,13 @@ class _EmailAuthViewState extends State<EmailAuthView> {
                         return null;
                       },
                       obscureText: !state.showPassword,
-                      focusNode: passwordFocusNode,
                       decoration: InputDecoration(
                         labelText: 'Password',
                         suffixIcon: IconButton(
                           onPressed: () {
-                            context.read<AuthBloc>().add(
-                                  ShowPasswordChanged(),
-                                );
+                            authBloc.add(
+                              ShowPasswordChanged(),
+                            );
                           },
                           icon: Icon(
                             state.showPassword
@@ -298,10 +265,8 @@ class _EmailAuthViewState extends State<EmailAuthView> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    style: TextButton.styleFrom(
-                      primary: AppColors.accentColor,
-                    ),
                     onPressed: () {
+                      FocusManager.instance.primaryFocus?.unfocus();
                       showModalBottomSheet<void>(
                         context: context,
                         isScrollControlled: true,
@@ -318,9 +283,7 @@ class _EmailAuthViewState extends State<EmailAuthView> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 24,
-                ),
+                verticalSpaceRegular,
                 Row(
                   children: [
                     Expanded(
@@ -328,51 +291,32 @@ class _EmailAuthViewState extends State<EmailAuthView> {
                         height: 54,
                         child: OutlinedButton(
                           onPressed: () {
-                            context.read<AuthBloc>().add(
-                                  RegisterWithEmailRequested(),
-                                );
+                            FocusManager.instance.primaryFocus?.unfocus();
+                            authBloc.add(
+                              RegisterWithEmailRequested(),
+                            );
                           },
-                          style: OutlinedButton.styleFrom(
-                            primary: AppColors.primaryColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            side: const BorderSide(
-                              color: AppColors.primaryColor,
-                            ),
-                          ),
                           child: const Text(
                             'Register',
-                            style: TextStyle(
-                              fontSize: 16,
-                            ),
+                            style: AppTypography.mediumBodyTextStyle,
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      width: 16,
-                    ),
+                    horizontalSpaceRegular,
                     Expanded(
                       child: SizedBox(
                         height: 54,
                         child: ElevatedButton(
                           onPressed: () {
-                            context.read<AuthBloc>().add(
-                                  SignInWithEmailRequested(),
-                                );
+                            FocusManager.instance.primaryFocus?.unfocus();
+                            authBloc.add(
+                              SignInWithEmailRequested(),
+                            );
                           },
-                          style: ElevatedButton.styleFrom(
-                            primary: AppColors.primaryColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                          ),
                           child: const Text(
                             'Login',
-                            style: TextStyle(
-                              fontSize: 16,
-                            ),
+                            style: AppTypography.mediumBodyTextStyle,
                           ),
                         ),
                       ),
