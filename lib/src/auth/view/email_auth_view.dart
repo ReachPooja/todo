@@ -15,9 +15,17 @@ class EmailAuthView extends StatelessWidget {
   Widget build(BuildContext context) {
     final authBloc = context.read<AuthBloc>();
 
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: IconThemeData(
+          color: isDarkMode ? Colors.white : Colors.black,
+        ),
+      ),
       body: MultiBlocListener(
         listeners: [
           BlocListener<AuthBloc, AuthState>(

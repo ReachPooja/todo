@@ -8,10 +8,8 @@ class AppTheme {
     primaryColor: AppColors.primaryColor,
     fontFamily: AppTypography.fontFamily,
     appBarTheme: const AppBarTheme(
-      color: Colors.transparent,
-      elevation: 0,
       iconTheme: IconThemeData(
-        color: Colors.black,
+        color: Colors.white,
       ),
     ),
     inputDecorationTheme: inputDecorationTheme,
@@ -33,10 +31,6 @@ class AppTheme {
     brightness: Brightness.dark,
     primaryColor: AppColors.primaryColor,
     fontFamily: AppTypography.fontFamily,
-    appBarTheme: const AppBarTheme(
-      color: Colors.transparent,
-      elevation: 0,
-    ),
     inputDecorationTheme: inputDecorationTheme,
     elevatedButtonTheme: elevatedButtonTheme,
     outlinedButtonTheme: outlinedButtonTheme,
