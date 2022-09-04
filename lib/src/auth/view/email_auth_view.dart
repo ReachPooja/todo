@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/app/router/router.dart';
 import 'package:todo/src/auth/auth.dart';
 import 'package:todo/src/core/domain/form_inputs/form_inputs.dart';
-import 'package:todo/src/core/presentation/layout/spacing.dart';
+import 'package:todo/src/core/presentation/layout/layout.dart';
 import 'package:todo/src/core/presentation/styles/styles.dart';
 
 class EmailAuthView extends StatelessWidget {
@@ -278,11 +278,7 @@ class EmailAuthView extends StatelessWidget {
                       showModalBottomSheet<void>(
                         context: context,
                         isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(12),
-                          ),
-                        ),
+                        shape: Constants.bottomSheetRadius,
                         builder: (context) => const ResetPasswordView(),
                       );
                     },

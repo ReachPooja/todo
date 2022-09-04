@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo/src/core/presentation/layout/layout.dart';
+import 'package:todo/src/core/presentation/layout/constants.dart';
 import 'package:todo/src/core/presentation/styles/styles.dart';
 
 class AppTheme {
@@ -12,7 +12,7 @@ class AppTheme {
         color: Colors.white,
       ),
     ),
-    inputDecorationTheme: inputDecorationTheme,
+    // inputDecorationTheme: inputDecorationTheme,
     elevatedButtonTheme: elevatedButtonTheme,
     outlinedButtonTheme: outlinedButtonTheme,
     textButtonTheme: textButtonTheme,
@@ -31,7 +31,7 @@ class AppTheme {
     brightness: Brightness.dark,
     primaryColor: AppColors.primaryColor,
     fontFamily: AppTypography.fontFamily,
-    inputDecorationTheme: inputDecorationTheme,
+    // inputDecorationTheme: inputDecorationTheme,
     elevatedButtonTheme: elevatedButtonTheme,
     outlinedButtonTheme: outlinedButtonTheme,
     textButtonTheme: textButtonTheme,
@@ -49,7 +49,7 @@ class AppTheme {
 
   static const inputDecorationTheme = InputDecorationTheme(
     border: OutlineInputBorder(
-      borderRadius: Layout.smallBorderRadius,
+      borderRadius: Constants.smallBorderRadius,
     ),
   );
 
@@ -57,7 +57,7 @@ class AppTheme {
     style: ElevatedButton.styleFrom(
       primary: AppColors.primaryColor,
       shape: const RoundedRectangleBorder(
-        borderRadius: Layout.smallBorderRadius,
+        borderRadius: Constants.smallBorderRadius,
       ),
     ),
   );
@@ -65,7 +65,7 @@ class AppTheme {
     style: OutlinedButton.styleFrom(
       primary: AppColors.primaryColor,
       shape: const RoundedRectangleBorder(
-        borderRadius: Layout.smallBorderRadius,
+        borderRadius: Constants.smallBorderRadius,
       ),
       side: const BorderSide(
         color: AppColors.primaryColor,

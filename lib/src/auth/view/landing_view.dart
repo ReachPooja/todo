@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo/app/app.dart';
 import 'package:todo/src/auth/auth.dart';
-import 'package:todo/src/core/presentation/layout/spacing.dart';
+import 'package:todo/src/core/presentation/layout/layout.dart';
 import 'package:todo/src/core/presentation/styles/styles.dart';
 
 class LandingView extends StatelessWidget {
