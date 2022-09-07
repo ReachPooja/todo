@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:todo/src/core/presentation/layout/layout.dart';
 import 'package:todo/src/core/presentation/styles/typography.dart';
 
@@ -11,6 +12,7 @@ class CreateTodoView extends StatefulWidget {
 
 class _CreateTodoViewState extends State<CreateTodoView> {
   DateTime? selectedDate;
+  final currentDay = DateTime.now();
 
   late TextEditingController _dateTextController;
   late TextEditingController _categoryTextController;
@@ -92,27 +94,33 @@ class _CreateTodoViewState extends State<CreateTodoView> {
                   if (value == 'Pick a date') {
                     final date = await showDatePicker(
                       context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime.now(),
+                      initialDate: currentDay,
+                      firstDate: currentDay,
                       lastDate: DateTime(
-                        DateTime.now().year + 1,
+                        currentDay.year + 1,
                       ),
                     );
                     setState(() {
                       selectedDate = date;
-                      _dateTextController.text = date!.toIso8601String();
+                      _dateTextController.text =
+                          DateFormat.yMMMd().format(date!);
                     });
                   }
                   if (value == 'Today') {
                     setState(() {
-                      selectedDate = DateTime.now();
+                      selectedDate = currentDay;
 
                       _dateTextController.text = value!;
                     });
                   }
                   if (value == 'Tomorrow') {
                     setState(() {
-                      selectedDate = DateTime.now();
+                      selectedDate = DateTime(
+                        currentDay.year,
+                        currentDay.month,
+                        currentDay.day + 1,
+                      );
+
                       _dateTextController.text = value!;
                     });
                   }
