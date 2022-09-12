@@ -2,16 +2,40 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todo/src/core/presentation/layout/layout.dart';
 import 'package:todo/src/core/presentation/styles/styles.dart';
+import 'package:todo/src/core/presentation/utils/extensions.dart';
 
-class TodoCard extends StatelessWidget {
+class TodoCard extends StatefulWidget {
   const TodoCard({super.key});
+
+  @override
+  State<TodoCard> createState() => _TodoCardState();
+}
+
+class _TodoCardState extends State<TodoCard> with TickerProviderStateMixin {
+  late AnimationController _controller;
+  bool isExpanded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 16),
+      padding: const EdgeInsets.only(top: 8),
       child: Slidable(
-        key: UniqueKey(),
+        key: const ValueKey('value'),
         startActionPane: ActionPane(
           motion: const ScrollMotion(),
           dismissible: DismissiblePane(
@@ -44,44 +68,89 @@ class TodoCard extends StatelessWidget {
           ],
         ),
         child: Card(
-          elevation: 0,
-          margin: const EdgeInsets.symmetric(horizontal: 16),
+          margin: const EdgeInsets.symmetric(horizontal: 8),
           child: Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                    Text(
                       'Todo name',
-                      style: AppTypography.largeBodyTextStyle,
+                      style: Theme.of(context).smallTitlePrimaryTextStyle,
                     ),
-                    Row(
-                      children: const [
-                        Icon(
-                          Icons.calendar_today,
-                          color: AppColors.accentColor,
-                          size: 18,
+                    InkWell(
+                      onTap: () {
+                        if (isExpanded) {
+                          _controller.reverse();
+                        } else {
+                          _controller.forward();
+                        }
+                        setState(() {
+                          isExpanded = !isExpanded;
+                        });
+                      },
+                      borderRadius: Constants.circularBorderRadius,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: RotationTransition(
+                          turns:
+                              // ignore: prefer_int_literals
+                              Tween(begin: 0.0, end: 0.5).animate(_controller),
+                          child: Icon(
+                            Icons.expand_more,
+                            color: isExpanded ? AppColors.accentColor : null,
+                          ),
                         ),
-                        horizontalSpaceTiny,
-                        Text(
-                          '22 Aug',
-                          style: AppTypography.smallBodyTextStyle,
-                        ),
-                      ],
+                      ),
                     ),
                   ],
                 ),
-                verticalSpaceTiny,
-                const Text(
-                  'Todo description goes here!. And we can we gfed'
-                  ' breifly',
-                  style: TextStyle(
-                    color: Colors.grey,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width / 1.3,
+                  child: Text(
+                    'Todo description goes here!. And we can we gfed'
+                    ' breifly',
+                    style: Theme.of(context).smallBodySecondaryTextStyle,
                   ),
+                ),
+                verticalSpaceTiny,
+                Text(
+                  '22 Aug',
+                  style: Theme.of(context).smallBodyTertiaryTextStyle,
+                ),
+                verticalSpaceSmall,
+                AnimatedSwitcher(
+                  duration: const Duration(
+                    milliseconds: 200,
+                  ),
+                  transitionBuilder: (child, animation) => SizeTransition(
+                    sizeFactor: animation,
+                    child: FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    ),
+                  ),
+                  child: isExpanded
+                      ? Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: List.generate(
+                            3,
+                            (index) => CheckboxListTile(
+                              activeColor: AppColors.accentColor,
+                              contentPadding: EdgeInsets.zero,
+                              controlAffinity: ListTileControlAffinity.leading,
+                              visualDensity: VisualDensity.compact,
+                              value: true,
+                              onChanged: (value) {},
+                              title: const Text('sub task'),
+                            ),
+                          ).toList(),
+                        )
+                      : const SizedBox.shrink(),
                 ),
               ],
             ),
