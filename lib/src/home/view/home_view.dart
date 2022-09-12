@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:todo/src/auth/auth.dart';
 import 'package:todo/src/core/presentation/layout/layout.dart';
 import 'package:todo/src/core/presentation/styles/styles.dart';
@@ -40,33 +41,74 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
           SliverOverlapAbsorber(
             handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
             sliver: SliverAppBar(
-              backgroundColor: Theme.of(context).cardColor,
+              // backgroundColor: isLightMode ? Colors.white : null,
               pinned: true,
               floating: true,
               forceElevated: innerBoxIsScrolled,
-              title: Text(
-                greeting(),
-                style: TextStyle(
-                  color: isLightMode ? Colors.grey : null,
-                ),
+              title: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(greeting()),
+                  Text(
+                    DateFormat.yMMMEd().format(
+                      DateTime.now(),
+                    ),
+                    style: const TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
               ),
               leading: Center(
                 child: CircleAvatar(
                   radius: 20,
                   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                  child: Text(
-                    user.name.isEmpty
-                        ? user.email.substring(0, 1).toUpperCase()
-                        : user.name.substring(0, 1).toUpperCase(),
-                    style: const TextStyle(
-                      color: AppColors.primaryColor,
-                    ),
-                  ),
+                  child: user.profileUrl.isEmpty
+                      ? Text(
+                          user.name.isEmpty
+                              ? user.email.substring(0, 1).toUpperCase()
+                              : user.name.substring(0, 1).toUpperCase(),
+                          style: const TextStyle(
+                            color: AppColors.primaryColor,
+                          ),
+                        )
+                      : ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: Image.network(
+                            user.profileUrl,
+                            width: double.infinity,
+                            height: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                 ),
               ),
+              actions: [
+                PopupMenuButton<String>(
+                  itemBuilder: (context) {
+                    return [
+                      const PopupMenuItem(
+                        child: Text(
+                          'Completed tasks',
+                        ),
+                      ),
+                      const PopupMenuItem(
+                        child: Text(
+                          'Theme mode',
+                        ),
+                      ),
+                      const PopupMenuItem(
+                        child: Text(
+                          'Logout',
+                        ),
+                      ),
+                    ];
+                  },
+                )
+              ],
               bottom: TabBar(
-                labelColor: AppColors.accentColor,
-                unselectedLabelColor: Colors.grey,
                 controller: controller,
                 indicatorWeight: 3,
                 indicatorColor: AppColors.accentColor,
@@ -125,7 +167,9 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                       ),
                       SliverList(
                         delegate: SliverChildBuilderDelegate(
-                          (context, index) => const TodoCard(),
+                          (context, index) => TodoCard(
+                            key: ValueKey(index),
+                          ),
                           childCount: 7,
                         ),
                       ),
