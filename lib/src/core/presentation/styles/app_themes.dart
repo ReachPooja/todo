@@ -5,7 +5,7 @@ import 'package:todo/src/core/presentation/styles/styles.dart';
 class AppTheme {
   static final ligthTheme = ThemeData(
     brightness: Brightness.light,
-    scaffoldBackgroundColor: Colors.grey.shade200,
+    // scaffoldBackgroundColor: Colors.grey.shade200,
     primaryColor: AppColors.primaryColor,
     fontFamily: AppTypography.fontFamily,
     appBarTheme: const AppBarTheme(
