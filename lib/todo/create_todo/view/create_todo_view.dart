@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:todo/src/core/presentation/layout/layout.dart';
@@ -56,7 +57,7 @@ class _CreateTodoViewState extends State<CreateTodoView> {
           ),
           TextFormField(
             decoration: const InputDecoration(
-              labelText: 'Todo',
+              labelText: 'Task',
             ),
           ),
           verticalSpaceRegular,
@@ -141,10 +142,6 @@ class _CreateTodoViewState extends State<CreateTodoView> {
                 ),
                 items: const [
                   DropdownMenuItem(
-                    value: 'All',
-                    child: Text('All'),
-                  ),
-                  DropdownMenuItem(
                     value: 'Personal',
                     child: Text('Personal'),
                   ),
@@ -156,25 +153,84 @@ class _CreateTodoViewState extends State<CreateTodoView> {
                     value: 'Work',
                     child: Text('Work'),
                   ),
+                  DropdownMenuItem(
+                    value: 'Add new category',
+                    child: Text('Add new category'),
+                  ),
                 ],
                 onChanged: (value) {
-                  setState(() {
-                    _categoryTextController.text = value!;
-                  });
+                  if (value == 'Add new category') {
+                    showDialog<void>(
+                      context: context,
+                      builder: (context) => Center(
+                        child: Card(
+                          margin: const EdgeInsets.all(20),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                TextFormField(
+                                  decoration: const InputDecoration(
+                                    labelText: 'New Category',
+                                  ),
+                                ),
+                                verticalSpaceRegular,
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    TextButton(
+                                      style: TextButton.styleFrom(
+                                        foregroundColor: Colors.grey,
+                                      ),
+                                      onPressed: () {
+                                        context.router.pop();
+                                      },
+                                      child: const Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {},
+                                      child: const Text('Done'),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  } else {
+                    setState(() {
+                      _categoryTextController.text = value!;
+                    });
+                  }
                 },
               ),
             ),
           ),
           verticalSpaceRegular,
-          ElevatedButton.icon(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.add_task_rounded,
-            ),
-            label: const Text(
-              'Add Task',
-              style: AppTypography.mediumBodyTextStyle,
-            ),
+          Row(
+            children: [
+              OutlinedButton.icon(
+                onPressed: () {},
+                icon: const Icon(Icons.add),
+                label: const Text('Add subtask'),
+              ),
+              horizontalSpaceRegular,
+              Expanded(
+                child: ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.add_task_rounded,
+                  ),
+                  label: const Text(
+                    'Add Task',
+                    style: AppTypography.mediumBodyTextStyle,
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
