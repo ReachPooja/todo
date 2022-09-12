@@ -56,7 +56,7 @@ class AppTheme {
 
   static final elevatedButtonTheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      primary: AppColors.primaryColor,
+      backgroundColor: AppColors.primaryColor,
       shape: const RoundedRectangleBorder(
         borderRadius: Constants.smallBorderRadius,
       ),
@@ -64,7 +64,7 @@ class AppTheme {
   );
   static final outlinedButtonTheme = OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
-      primary: AppColors.primaryColor,
+      foregroundColor: AppColors.primaryColor,
       shape: const RoundedRectangleBorder(
         borderRadius: Constants.smallBorderRadius,
       ),
@@ -75,7 +75,7 @@ class AppTheme {
   );
   static final textButtonTheme = TextButtonThemeData(
     style: TextButton.styleFrom(
-      primary: AppColors.accentColor,
+      foregroundColor: AppColors.accentColor,
     ),
   );
 }

@@ -41,7 +41,7 @@ Future<void> skipDialog(
                       Navigator.of(context).pop();
                     },
                     style: TextButton.styleFrom(
-                      primary: Colors.red,
+                      foregroundColor: Colors.red,
                     ),
                     child: const Text(
                       'Cancel',
@@ -53,7 +53,7 @@ Future<void> skipDialog(
                   TextButton(
                     onPressed: () {},
                     style: TextButton.styleFrom(
-                      primary: AppColors.primaryColor,
+                      foregroundColor: AppColors.primaryColor,
                     ),
                     child: const Text(
                       'Continue',
