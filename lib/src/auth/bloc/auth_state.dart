@@ -7,6 +7,7 @@ class AuthState extends Equatable {
     this.emailLoginStatus = const Status.initial(),
     this.emailRegisterStatus = const Status.initial(),
     this.resetPasswordStatus = const Status.initial(),
+    this.logoutStatus = const Status.initial(),
     this.email = const Email.pure(),
     this.resetEmail = const Email.pure(),
     this.password = const Password.pure(),
@@ -21,6 +22,7 @@ class AuthState extends Equatable {
   final Status emailLoginStatus;
   final Status emailRegisterStatus;
   final Status resetPasswordStatus;
+  final Status logoutStatus;
   final Email email;
   final Email resetEmail;
   final Password password;
@@ -37,6 +39,7 @@ class AuthState extends Equatable {
       emailLoginStatus,
       emailRegisterStatus,
       resetPasswordStatus,
+      logoutStatus,
       email,
       resetEmail,
       password,
@@ -53,6 +56,7 @@ class AuthState extends Equatable {
     Status? emailLoginStatus,
     Status? emailRegisterStatus,
     Status? resetPasswordStatus,
+    Status? logoutStatus,
     Email? email,
     Email? resetEmail,
     Password? password,
@@ -67,6 +71,7 @@ class AuthState extends Equatable {
       emailLoginStatus: emailLoginStatus ?? this.emailLoginStatus,
       emailRegisterStatus: emailRegisterStatus ?? this.emailRegisterStatus,
       resetPasswordStatus: resetPasswordStatus ?? this.resetPasswordStatus,
+      logoutStatus: logoutStatus ?? this.logoutStatus,
       email: email ?? this.email,
       resetEmail: resetEmail ?? this.resetEmail,
       password: password ?? this.password,
@@ -79,11 +84,6 @@ class AuthState extends Equatable {
 
   @override
   String toString() {
-    return 'AuthState(authCheckStatus: $authCheckStatus, googleLoginStatus:'
-        ' $googleLoginStatus, emailLoginStatus: $emailLoginStatus, '
-        'emailRegisterStatus: $emailRegisterStatus, resetPasswordStatus: '
-        '$resetPasswordStatus, email: $email, resetEmail: $resetEmail, '
-        'password: $password, user: $user, showError: $showError, showPassword:'
-        ' $showPassword, isUserAuthenticated: $isUserAuthenticated)';
+    return 'AuthState(authCheckStatus: $authCheckStatus, googleLoginStatus: $googleLoginStatus, emailLoginStatus: $emailLoginStatus, emailRegisterStatus: $emailRegisterStatus, resetPasswordStatus: $resetPasswordStatus, logoutStatus: $logoutStatus, email: $email, resetEmail: $resetEmail, password: $password, user: $user, showError: $showError, showPassword: $showPassword, isUserAuthenticated: $isUserAuthenticated)';
   }
 }
