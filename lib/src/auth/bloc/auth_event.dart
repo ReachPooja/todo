@@ -45,3 +45,5 @@ class RegisterWithEmailRequested extends AuthEvent {}
 class SignInWithEmailRequested extends AuthEvent {}
 
 class ResetPasswordRequested extends AuthEvent {}
+
+class LoggedOut extends AuthEvent {}

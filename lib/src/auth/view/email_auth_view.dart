@@ -291,38 +291,26 @@ class EmailAuthView extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: SizedBox(
-                        height: 54,
-                        child: OutlinedButton(
-                          onPressed: () {
-                            FocusManager.instance.primaryFocus?.unfocus();
-                            authBloc.add(
-                              RegisterWithEmailRequested(),
-                            );
-                          },
-                          child: const Text(
-                            'Register',
-                            style: AppTypography.mediumBodyTextStyle,
-                          ),
-                        ),
+                      child: OutlinedButton(
+                        onPressed: () {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          authBloc.add(
+                            RegisterWithEmailRequested(),
+                          );
+                        },
+                        child: const Text('Register'),
                       ),
                     ),
                     horizontalSpaceRegular,
                     Expanded(
-                      child: SizedBox(
-                        height: 54,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            FocusManager.instance.primaryFocus?.unfocus();
-                            authBloc.add(
-                              SignInWithEmailRequested(),
-                            );
-                          },
-                          child: const Text(
-                            'Login',
-                            style: AppTypography.mediumBodyTextStyle,
-                          ),
-                        ),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          authBloc.add(
+                            SignInWithEmailRequested(),
+                          );
+                        },
+                        child: const Text('Login'),
                       ),
                     ),
                   ],

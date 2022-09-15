@@ -25,6 +25,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<RegisterWithEmailRequested>(_onRegisterWithEmailRequested);
     on<SignInWithEmailRequested>(_onSignInWithEmailRequested);
     on<ResetPasswordRequested>(_onResetPasswordRequested);
+    on<LoggedOut>(_onLoggedOut);
   }
 
   final IAuthRepository _authRepository;
@@ -223,5 +224,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ),
       );
     }
+  }
+
+  Future<void> _onLoggedOut(LoggedOut event, Emitter<AuthState> emit) async {
+    emit(
+      state.copyWith(
+        logoutStatus: const Status.loading(),
+      ),
+    );
+    await _authRepository.logout();
+
+    emit(
+      state.copyWith(
+        logoutStatus: const Status.success(),
+        isUserAuthenticated: false,
+      ),
+    );
   }
 }

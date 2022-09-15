@@ -63,19 +63,15 @@ class ResetPasswordView extends StatelessWidget {
                 );
               },
             ),
-            SizedBox(
-              height: 54,
-              child: ElevatedButton(
-                onPressed: () {
-                  FocusManager.instance.primaryFocus?.unfocus();
-                  context.read<AuthBloc>().add(
-                        ResetPasswordRequested(),
-                      );
-                },
-                child: const Text(
-                  'Send Reset Email',
-                  style: AppTypography.mediumBodyTextStyle,
-                ),
+            ElevatedButton(
+              onPressed: () {
+                FocusManager.instance.primaryFocus?.unfocus();
+                context.read<AuthBloc>().add(
+                      ResetPasswordRequested(),
+                    );
+              },
+              child: const Text(
+                'Send Reset Email',
               ),
             ),
           ],
