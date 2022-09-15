@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:todo/src/core/presentation/layout/layout.dart';
+import 'package:todo/src/core/presentation/layout/constants.dart';
 import 'package:todo/src/core/presentation/styles/styles.dart';
 
 class AppTheme {
   static final ligthTheme = ThemeData(
     brightness: Brightness.light,
+    // scaffoldBackgroundColor: Colors.grey.shade200,
     primaryColor: AppColors.primaryColor,
     fontFamily: AppTypography.fontFamily,
     appBarTheme: const AppBarTheme(
-      color: Colors.transparent,
-      elevation: 0,
       iconTheme: IconThemeData(
-        color: Colors.black,
+        color: Colors.white,
       ),
     ),
-    inputDecorationTheme: inputDecorationTheme,
+    // inputDecorationTheme: inputDecorationTheme,
     elevatedButtonTheme: elevatedButtonTheme,
     outlinedButtonTheme: outlinedButtonTheme,
     textButtonTheme: textButtonTheme,
@@ -33,11 +32,7 @@ class AppTheme {
     brightness: Brightness.dark,
     primaryColor: AppColors.primaryColor,
     fontFamily: AppTypography.fontFamily,
-    appBarTheme: const AppBarTheme(
-      color: Colors.transparent,
-      elevation: 0,
-    ),
-    inputDecorationTheme: inputDecorationTheme,
+    // inputDecorationTheme: inputDecorationTheme,
     elevatedButtonTheme: elevatedButtonTheme,
     outlinedButtonTheme: outlinedButtonTheme,
     textButtonTheme: textButtonTheme,
@@ -55,23 +50,23 @@ class AppTheme {
 
   static const inputDecorationTheme = InputDecorationTheme(
     border: OutlineInputBorder(
-      borderRadius: Layout.smallBorderRadius,
+      borderRadius: Constants.smallBorderRadius,
     ),
   );
 
   static final elevatedButtonTheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      primary: AppColors.primaryColor,
+      backgroundColor: AppColors.primaryColor,
       shape: const RoundedRectangleBorder(
-        borderRadius: Layout.smallBorderRadius,
+        borderRadius: Constants.smallBorderRadius,
       ),
     ),
   );
   static final outlinedButtonTheme = OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
-      primary: AppColors.primaryColor,
+      foregroundColor: AppColors.primaryColor,
       shape: const RoundedRectangleBorder(
-        borderRadius: Layout.smallBorderRadius,
+        borderRadius: Constants.smallBorderRadius,
       ),
       side: const BorderSide(
         color: AppColors.primaryColor,
@@ -80,7 +75,7 @@ class AppTheme {
   );
   static final textButtonTheme = TextButtonThemeData(
     style: TextButton.styleFrom(
-      primary: AppColors.accentColor,
+      foregroundColor: AppColors.accentColor,
     ),
   );
 }

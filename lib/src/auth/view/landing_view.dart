@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo/app/app.dart';
 import 'package:todo/src/auth/auth.dart';
-import 'package:todo/src/core/presentation/layout/spacing.dart';
+import 'package:todo/src/core/presentation/layout/layout.dart';
 import 'package:todo/src/core/presentation/styles/styles.dart';
 
 class LandingView extends StatelessWidget {
@@ -44,6 +44,7 @@ class LandingView extends StatelessWidget {
           body: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Spacer(),
                 const Text(
@@ -67,43 +68,34 @@ class LandingView extends StatelessWidget {
                     height: MediaQuery.of(context).size.height / 2,
                   ),
                 ),
-                SizedBox(
-                  width: double.infinity,
-                  height: 54,
-                  child: ElevatedButton.icon(
-                    onPressed: () {
-                      context.read<AuthBloc>().add(
-                            SignInWithGoogleRequested(),
-                          );
-                    },
-                    icon: SvgPicture.asset(
-                      'assets/icons/google.svg',
-                      height: 20,
-                      color: Colors.white,
-                    ),
-                    label: const Text(
-                      'Continue with Google',
-                      style: AppTypography.mediumBodyTextStyle,
-                    ),
+                ElevatedButton.icon(
+                  onPressed: () {
+                    context.read<AuthBloc>().add(
+                          SignInWithGoogleRequested(),
+                        );
+                  },
+                  icon: SvgPicture.asset(
+                    'assets/icons/google.svg',
+                    height: 16,
+                    color: Colors.white,
+                  ),
+                  label: const Text(
+                    'Continue with Google',
                   ),
                 ),
-                verticalSpaceRegular,
-                SizedBox(
-                  width: double.infinity,
-                  height: 54,
-                  child: OutlinedButton.icon(
-                    onPressed: () {
-                      context.router.push(
-                        const EmailAuthRoute(),
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.email_outlined,
-                    ),
-                    label: const Text(
-                      'Continue with Email',
-                      style: AppTypography.mediumBodyTextStyle,
-                    ),
+                verticalSpaceTiny,
+                OutlinedButton.icon(
+                  onPressed: () {
+                    context.router.push(
+                      const EmailAuthRoute(),
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.email_outlined,
+                    size: 20,
+                  ),
+                  label: const Text(
+                    'Continue with Email',
                   ),
                 ),
               ],

@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/app/router/router.dart';
 import 'package:todo/src/auth/auth.dart';
 import 'package:todo/src/core/domain/form_inputs/form_inputs.dart';
-import 'package:todo/src/core/presentation/layout/spacing.dart';
+import 'package:todo/src/core/presentation/layout/layout.dart';
 import 'package:todo/src/core/presentation/styles/styles.dart';
 
 class EmailAuthView extends StatelessWidget {
@@ -15,9 +15,17 @@ class EmailAuthView extends StatelessWidget {
   Widget build(BuildContext context) {
     final authBloc = context.read<AuthBloc>();
 
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: IconThemeData(
+          color: isDarkMode ? Colors.white : Colors.black,
+        ),
+      ),
       body: MultiBlocListener(
         listeners: [
           BlocListener<AuthBloc, AuthState>(
@@ -270,11 +278,7 @@ class EmailAuthView extends StatelessWidget {
                       showModalBottomSheet<void>(
                         context: context,
                         isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(12),
-                          ),
-                        ),
+                        shape: Constants.bottomSheetRadius,
                         builder: (context) => const ResetPasswordView(),
                       );
                     },
@@ -287,38 +291,26 @@ class EmailAuthView extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: SizedBox(
-                        height: 54,
-                        child: OutlinedButton(
-                          onPressed: () {
-                            FocusManager.instance.primaryFocus?.unfocus();
-                            authBloc.add(
-                              RegisterWithEmailRequested(),
-                            );
-                          },
-                          child: const Text(
-                            'Register',
-                            style: AppTypography.mediumBodyTextStyle,
-                          ),
-                        ),
+                      child: OutlinedButton(
+                        onPressed: () {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          authBloc.add(
+                            RegisterWithEmailRequested(),
+                          );
+                        },
+                        child: const Text('Register'),
                       ),
                     ),
                     horizontalSpaceRegular,
                     Expanded(
-                      child: SizedBox(
-                        height: 54,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            FocusManager.instance.primaryFocus?.unfocus();
-                            authBloc.add(
-                              SignInWithEmailRequested(),
-                            );
-                          },
-                          child: const Text(
-                            'Login',
-                            style: AppTypography.mediumBodyTextStyle,
-                          ),
-                        ),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          authBloc.add(
+                            SignInWithEmailRequested(),
+                          );
+                        },
+                        child: const Text('Login'),
                       ),
                     ),
                   ],

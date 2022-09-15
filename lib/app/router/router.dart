@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:todo/src/auth/view/email_auth_view.dart';
 import 'package:todo/src/home/view/home_view.dart';
 import 'package:todo/src/startup/startup_view.dart';
+import 'package:todo/todo/create_todo/view/create_todo_view.dart';
 
 part 'router.gr.dart';
 
@@ -12,6 +13,7 @@ part 'router.gr.dart';
     AutoRoute(page: StartupView, initial: true),
     AutoRoute(page: EmailAuthView),
     AutoRoute(page: HomeView),
+    AutoRoute(page: CreateTodoView),
   ],
 )
 // extend the generated private router
