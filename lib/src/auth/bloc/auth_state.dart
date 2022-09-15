@@ -84,6 +84,12 @@ class AuthState extends Equatable {
 
   @override
   String toString() {
-    return 'AuthState(authCheckStatus: $authCheckStatus, googleLoginStatus: $googleLoginStatus, emailLoginStatus: $emailLoginStatus, emailRegisterStatus: $emailRegisterStatus, resetPasswordStatus: $resetPasswordStatus, logoutStatus: $logoutStatus, email: $email, resetEmail: $resetEmail, password: $password, user: $user, showError: $showError, showPassword: $showPassword, isUserAuthenticated: $isUserAuthenticated)';
+    return 'AuthState(authCheckStatus: $authCheckStatus, googleLoginStatus:'
+        ' $googleLoginStatus, emailLoginStatus: $emailLoginStatus,'
+        ' emailRegisterStatus: $emailRegisterStatus, resetPasswordStatus: '
+        '$resetPasswordStatus, logoutStatus: $logoutStatus, email: $email, '
+        'resetEmail: $resetEmail, password: $password, user: $user, showError: '
+        '$showError, showPassword: $showPassword, isUserAuthenticated: '
+        '$isUserAuthenticated)';
   }
 }
