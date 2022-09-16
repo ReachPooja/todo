@@ -8,7 +8,6 @@ import 'package:todo/src/auth/auth.dart';
 import 'package:todo/src/core/presentation/layout/layout.dart';
 import 'package:todo/src/core/presentation/styles/styles.dart';
 import 'package:todo/src/home/view/widgets/todo_card.dart';
-import 'package:todo/src/theme/cubit/theme_cubit.dart';
 import 'package:todo/src/theme/view/theme_dialog.dart';
 import 'package:todo/src/todo/create_todo/view/create_todo_view.dart';
 
