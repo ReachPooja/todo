@@ -6,6 +6,7 @@ import 'package:todo/app/app.dart';
 import 'package:todo/l10n/l10n.dart';
 import 'package:todo/src/auth/auth.dart';
 import 'package:todo/src/core/presentation/styles/styles.dart';
+import 'package:todo/src/theme/cubit/theme_cubit.dart';
 
 class App extends StatelessWidget {
   App({super.key});
@@ -19,19 +20,25 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (context) => getIt<AuthBloc>(),
         ),
+        BlocProvider(
+          create: (context) => ThemeCubit(),
+        ),
       ],
-      child: MaterialApp.router(
-        theme: AppTheme.ligthTheme,
-        darkTheme: AppTheme.darkTheme,
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-        ],
-        supportedLocales: AppLocalizations.supportedLocales,
-        routerDelegate: AutoRouterDelegate(_appRouter),
-        routeInformationParser: _appRouter.defaultRouteParser(),
-      ),
+      child: Builder(builder: (context) {
+        return MaterialApp.router(
+          themeMode: context.watch<ThemeCubit>().state,
+          theme: AppTheme.ligthTheme,
+          darkTheme: AppTheme.darkTheme,
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          routerDelegate: AutoRouterDelegate(_appRouter),
+          routeInformationParser: _appRouter.defaultRouteParser(),
+        );
+      }),
     );
   }
 }
