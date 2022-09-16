@@ -7,7 +7,6 @@ import 'package:todo/app/app.dart';
 import 'package:todo/src/auth/auth.dart';
 import 'package:todo/src/core/presentation/layout/layout.dart';
 import 'package:todo/src/core/presentation/styles/styles.dart';
-import 'package:todo/src/theme/cubit/theme_cubit.dart';
 
 class LandingView extends StatelessWidget {
   const LandingView({super.key});

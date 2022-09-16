@@ -8,6 +8,8 @@ import 'package:todo/src/auth/auth.dart';
 import 'package:todo/src/core/presentation/layout/layout.dart';
 import 'package:todo/src/core/presentation/styles/styles.dart';
 import 'package:todo/src/home/view/widgets/todo_card.dart';
+import 'package:todo/src/theme/cubit/theme_cubit.dart';
+import 'package:todo/src/theme/view/theme_dialog.dart';
 import 'package:todo/src/todo/create_todo/view/create_todo_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -121,70 +123,22 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                             'Completed tasks',
                           ),
                         ),
-                        const PopupMenuItem(
-                          child: Text(
+                        PopupMenuItem(
+                          onTap: () {
+                            Future.delayed(
+                              const Duration(microseconds: 1),
+                              () => themeDialog(context),
+                            );
+                          },
+                          child: const Text(
                             'Theme mode',
                           ),
                         ),
                         PopupMenuItem(
                           onTap: () {
                             Future.delayed(
-                              // ignore: use_named_constants
-                              const Duration(),
-                              () => showDialog<void>(
-                                context: context,
-                                builder: (context) => Center(
-                                  child: Card(
-                                    margin: const EdgeInsets.all(16),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(12),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          const Text('Are you sure?'),
-                                          verticalSpaceSmall,
-                                          const Text(
-                                            'You are about to logout',
-                                            style: AppTypography
-                                                .smallBodyTextStyle,
-                                          ),
-                                          verticalSpaceSmall,
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              TextButton(
-                                                onPressed: () {
-                                                  context.router.pop();
-                                                },
-                                                style: TextButton.styleFrom(
-                                                  foregroundColor: Colors.red,
-                                                ),
-                                                child: const Text('Cancel'),
-                                              ),
-                                              horizontalSpaceRegular,
-                                              TextButton(
-                                                onPressed: () {
-                                                  context
-                                                      .read<AuthBloc>()
-                                                      .add(LoggedOut());
-                                                },
-                                                style: TextButton.styleFrom(
-                                                  foregroundColor:
-                                                      AppColors.accentColor,
-                                                ),
-                                                child: const Text('Logout'),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              const Duration(microseconds: 1),
+                              () => logoutDialog(context),
                             );
                           },
                           child: const Text('Logout'),
@@ -304,4 +258,55 @@ String greeting() {
     return 'Good Afternoon!';
   }
   return 'Good Evening!';
+}
+
+Future<void> logoutDialog(BuildContext context) {
+  return showDialog<void>(
+    context: context,
+    builder: (context) => Center(
+      child: Card(
+        margin: const EdgeInsets.all(16),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text('Are you sure?'),
+              verticalSpaceSmall,
+              const Text(
+                'You are about to logout',
+                style: AppTypography.smallBodyTextStyle,
+              ),
+              verticalSpaceSmall,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      context.router.pop();
+                    },
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.red,
+                    ),
+                    child: const Text('Cancel'),
+                  ),
+                  horizontalSpaceRegular,
+                  TextButton(
+                    onPressed: () {
+                      context.read<AuthBloc>().add(LoggedOut());
+                    },
+                    style: TextButton.styleFrom(
+                      foregroundColor: AppColors.accentColor,
+                    ),
+                    child: const Text('Logout'),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
 }

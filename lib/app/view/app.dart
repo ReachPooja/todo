@@ -24,21 +24,23 @@ class App extends StatelessWidget {
           create: (context) => ThemeCubit(),
         ),
       ],
-      child: Builder(builder: (context) {
-        return MaterialApp.router(
-          themeMode: context.watch<ThemeCubit>().state,
-          theme: AppTheme.ligthTheme,
-          darkTheme: AppTheme.darkTheme,
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-          ],
-          supportedLocales: AppLocalizations.supportedLocales,
-          routerDelegate: AutoRouterDelegate(_appRouter),
-          routeInformationParser: _appRouter.defaultRouteParser(),
-        );
-      }),
+      child: Builder(
+        builder: (context) {
+          return MaterialApp.router(
+            themeMode: context.watch<ThemeCubit>().state,
+            theme: AppTheme.ligthTheme,
+            darkTheme: AppTheme.darkTheme,
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+            ],
+            supportedLocales: AppLocalizations.supportedLocales,
+            routerDelegate: AutoRouterDelegate(_appRouter),
+            routeInformationParser: _appRouter.defaultRouteParser(),
+          );
+        },
+      ),
     );
   }
 }
